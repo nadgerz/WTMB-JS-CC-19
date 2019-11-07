@@ -29,12 +29,57 @@ html {
 body {
     color: darkslategray;
     font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     line-height: 1.5;
     /*margin: auto;*/
+    background-color: lavenderblush;
 }
 
-.index-page {
+h1, h2, h3, h4, h5 {
+    margin: .7rem 0 .5rem;
+}
+
+h1 {
+    font-size: 4rem;
+    line-height: 2;
+}
+
+h2 {
+    font-size: 2.5rem;
+    line-height: 2;
+}
+
+h3 {
+    font-size: 1.5rem;
+    line-height: 2;
+}
+
+h4 {
+    font-size: 1.3rem;
+}
+
+ol li {
+    font-weight: bold;
+    margin: .5rem 0;
+}
+
+ul {
+    margin-bottom: 1.5rem;
+}
+
+ol li {
+    list-style-type: decimal-leading-zero;
+    list-style-position: inside;
+}
+
+ul li {
+    font-weight: normal;
+    list-style-type: square;
+    list-style-position: inside;
+}
+
+
+main {
     width: 70vw;
     max-width: 700px;
     height: 85vh;
@@ -43,5 +88,6 @@ body {
     margin: 5% auto;
     /*border: 1px solid black;*/
 
-    background-color: lavenderblush;
+    background-color: blanchedalmond;
 }
+
