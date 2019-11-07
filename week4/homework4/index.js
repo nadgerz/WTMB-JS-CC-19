@@ -42,15 +42,24 @@ app.post(`/new-user`, async (request, response) => {
   if (!user) {
     response.send('please try again');
   }
-  response.render('user', { user })
+  response.render('user', { user });
 });
 
-// app.delete(`/person/:id`, async (request, response) => {
-//   const id = request.params.id;
-//   await PersonService.del(id);
-//   response.send('ok');
-// //   axios.delete
-// });
+app.delete(`/del-user/:id`, async (request, response) => {
+  const id = request.params.id;
+  const users = await UserService.findAll();
+
+  if (id < 1 || id > users.length) {
+    response.send('out of bounds');
+    return;
+  }
+  const user = users[id-1];
+
+  await UserService.delete(user.id);
+
+  response.send('ok');
+  // response.render('users', { users });
+});
 
 // axios.get
 
