@@ -42,11 +42,13 @@ h1, h2, h3, h4, h5 {
 h1 {
     font-size: 5rem;
     line-height: 1;
+    margin-bottom: 4rem;
 }
 
 h2 {
     font-size: 2.5rem;
     line-height: 2;
+    text-transform: uppercase;
 }
 
 h3 {
@@ -97,6 +99,14 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid grey;
-    margin: 1rem 0;
+    margin: 3rem 0;
     padding: 0;
+}
+
+.button {
+    padding: .8rem 3rem;
+    background-color: darkslategray;
+    text-decoration: none;
+    color: blanchedalmond;
+    /*margin: 5rem 0;*/
 }
