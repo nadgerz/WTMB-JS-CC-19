@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h2 Number of Users: #{users.length}
+    ol.users
+        each user in users
+            li #{user.name}
+            ul.recipes
+                each recipe in user.recipes
+                    li #{recipe.title}
