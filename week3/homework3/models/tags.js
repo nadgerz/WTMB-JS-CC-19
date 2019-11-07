@@ -1,0 +1,58 @@
+const tags = {
+  mealType: ['Breakfast & Brunch', 'Lunch', 'Dinner', 'Desserts'],
+  dishType: [
+    'Appetizers & Snacks',
+    'Bread Recipes',
+    'Cake Recipes',
+    'Candy and Fudge',
+    'Casserole Recipes',
+    'Cocktails',
+    'Cookies',
+    'Fish Recipes',
+    'Main Dishes',
+    'Pasta',
+    'Pie',
+    'Pizza',
+    'Salads',
+    'Sandwiches',
+    'Sauces and Condiments',
+    'Side Dishes',
+    'Smoothies',
+    'Soups, Stews, and Chilis',
+  ],
+  season: [
+    'Spring',
+    'Easter ',
+    'Summer',
+    'Autumn',
+    'Halloween',
+    'Thanksgiving',
+    'Winter',
+    'Christmas',
+    'Add More',
+  ],
+
+  worldRegion: [
+    'Chinese',
+    'Indian',
+    'Italian',
+    'Mexican',
+    'Southern',
+    'Thai',
+    'add more',
+  ],
+
+  healthDiet: [
+    'Dairy Free',
+    'Diabetic',
+    'Gluten Free',
+    'Low Calorie',
+    'Low Carb',
+    'Pescatarian',
+    'Vegetarian',
+    'Vegan',
+    'Add More',
+  ],
+};
+
+module.exports = tags;

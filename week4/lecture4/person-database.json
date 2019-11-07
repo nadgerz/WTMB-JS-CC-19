@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Armagan",
+    "age": 34,
+    "meetups": [
+      "Women Tech Makers Berlin"
+    ],
+    "id": 2
+  },
+  {
+    "name": "Miri",
+    "age": 28,
+    "meetups": [],
+    "id": 3
+  },
+  {
+    "name": "Jason",
+    "age": 50,
+    "meetups": [],
+    "id": 4
+  }
+]
