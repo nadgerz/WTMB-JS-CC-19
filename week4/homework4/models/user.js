@@ -1,11 +1,11 @@
-const uuidv1 = require('uuid/v1');
+const uuid = require('uuid/v1');
 const Recipe = require('./recipe');
 // const UserService = require('../services/user-service');
 
 module.exports = class User {
   constructor(name, email, password, id, recipes = []) {
     this.name = name;
-    this.id = id || `${name.replace(' ', '').toLowerCase()}-${uuidv1()}`;
+    this.id = id || uuid();
     this.email = email;
     this.password = password;
 

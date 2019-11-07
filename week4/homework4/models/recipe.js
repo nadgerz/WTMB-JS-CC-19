@@ -5,7 +5,7 @@ const Version = require('./version');
 module.exports = class Recipe {
   constructor(title, id, dateCreated) {
     this.title = title;
-    this.id = id || `${this.title.replace(' ', '').toLowerCase()}-${uuid()}`;
+    this.id = id || uuid();
     this.dateCreated = dateCreated || new Date();
     this.versions = [];
 
