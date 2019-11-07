@@ -12,27 +12,11 @@ module.exports = class Service {
       fs.readFile(this.dbPath, 'utf8', async (err, file) => {
         if (err) {
           if (err.code === 'ENOENT') {
-            // TODO: dont understand this part very well
-            // MOPPET: What is happening here is that ENOENT indicates an error
-            //         specifically that the file supplied (this.dbPath) does not exist.
-            //
-            //         This would normally reject the Promise. But in this case, we can recover.
-            //
-            //         We can create the file they requested and return an empty array of objects
-            //         (whatever the coder requested) and pretend the file (database! :) ) was empty from
-            //         the get-go.
-            //
-            //         We could have returned an error instead and say (database) file not found, but this
-            //         version is a nicety instead because we can do the work for them and pretend nothing
-            //         went wrong.
             await this.saveAll([]);
-
             return resolve([]);
           }
-
           return reject(err);
         }
-
         const items = Flatted.parse(file).map(this.model.create);
 
         resolve(items);
