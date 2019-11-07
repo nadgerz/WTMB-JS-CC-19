@@ -7,7 +7,7 @@ let mockRecipes = require('./models/recipes');
 console.log('============================================');
 
 async function main() {
-  // let [recipe1, recipe2, recipe3] = mockRecipes;
+  let [recipe1, recipe2, recipe3] = mockRecipes;
 
   // CREATING USERS
   // let user1 = new User('Antonia', 'Antonia@mail.com', '1234');
@@ -23,6 +23,7 @@ async function main() {
   const [user1, user2, user3] = await UserService.findAll();
   // console.log(user1, user2, user3);
 
+
   // ADDING A RECIPE TO A USER
   // CREATING A VERSION FOR A RECIPE
   const eggVersion1 = {
@@ -30,8 +31,17 @@ async function main() {
     ingredients: [],
   };
   // user1.saveRecipe('eggs', eggVersion1);
+  // user2.saveRecipe(recipe1.title, recipe1.versions[0]);
+  // user3.saveRecipe(recipe2.title, recipe2.versions[0]);
+  // user3.saveRecipe(recipe3.title, recipe3.versions[0]);
+
   // await UserService.update(user1);
+  // await UserService.update(user2);
+  // await UserService.update(user3);
+
   // console.log(user1);
+  // console.log(user2);
+  // console.log(user3);
 
   // CREATING MORE VERSIONS FOR A RECIPE
   const eggVersion2 = {
@@ -76,7 +86,7 @@ async function main() {
   // console.log(eggRecipeVersion1);
   // await UserService.update(user1);
 
-  console.log(user1.recipes);
+  // console.log(user1.recipes);
   // console.log(user1, user2, user3);
 }
 
