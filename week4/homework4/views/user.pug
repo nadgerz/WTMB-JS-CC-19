@@ -4,8 +4,8 @@ block content
     div.user
         h2 #{user.name}
         hr
-        h3 #{user.recipes.length} Recipe#{user.recipes.length > 1 ? 's' : ''}:
+        h3 #{user.recipes.length} Recipe#{user.recipes.length === 1 ? '' : 's'}:
         ul.recipes
              each recipe in user.recipes
                  li " #{recipe.title} ",
-                         strong  #{recipe.versions.length} Version#{recipe.versions.length > 1 ? 's' : ''}
+                         strong  #{recipe.versions.length} Version#{recipe.versions.length === 1 ? '' : 's'}
