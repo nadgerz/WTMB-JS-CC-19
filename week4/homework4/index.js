@@ -25,20 +25,26 @@ app.get('/users', async (request, response) => {
   response.render('users', { users });
 });
 
-app.get(`/user/:num`, async (request, response) => {
-  const num = request.params.num;
+app.get(`/user/:id`, async (request, response) => {
+  const id = request.params.id;
   const users = await UserService.findAll();
-  const user = users[num - 1];
 
-  response.send(user);
+  if (id < 1 || id > users.length) {
+    response.render('404');
+    return;
+  }
+  const user = users[id - 1];
+  response.render('user', { user });
 });
 
-// app.post(`/person`, async (request, response) => {
-//   // console.log(request.body);
-//   const person = await PersonService.add(request.body);
-//   response.send(person)
-// });
-//
+app.post(`/new-user`, async (request, response) => {
+  const user = await UserService.add(request.body);
+  if (!user) {
+    response.send('please try again');
+  }
+  response.render('user', { user })
+});
+
 // app.delete(`/person/:id`, async (request, response) => {
 //   const id = request.params.id;
 //   await PersonService.del(id);

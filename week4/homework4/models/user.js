@@ -5,7 +5,6 @@ const Recipe = require('./recipe');
 module.exports = class User {
   constructor(name, email, password, id, recipes = []) {
     this.name = name;
-    // TODO: discuss this code with Steve
     this.id = id || `${name.replace(' ', '').toLowerCase()}-${uuidv1()}`;
     this.email = email;
     this.password = password;

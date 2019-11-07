@@ -8,10 +8,11 @@ class UserService extends BaseService {
     super(UserModel, `${__dirname}/../user-database.json`);
   }
 
-  async add(user) {
-    if (!isEmail(user.email)) {
+  async add({name, email, password}) {
+    if (!isEmail(email)) {
       return null;
     }
+    const user = new UserModel(name, email, password);
     return await super.add(user);
   }
 }
