@@ -41,6 +41,7 @@ app.post(`/new-user`, async (request, response) => {
   const user = await UserService.add(request.body);
   if (!user) {
     response.send('please try again');
+    return;
   }
   response.render('user', { user });
 });
@@ -61,7 +62,10 @@ app.delete(`/del-user/:id`, async (request, response) => {
   // response.render('users', { users });
 });
 
+
+
 // axios.get
+// fetching
 
 // // RETRIEVING USERS FROM DATABASE
 // const [user1, user2, user3] = await UserService.findAll();
