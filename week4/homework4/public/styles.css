@@ -78,6 +78,14 @@ ul li {
     list-style-position: inside;
 }
 
+ul.ingredients, ul.instructions {
+    margin-left: 2rem;
+}
+
+ul.ingredients li, ul.instructions li {
+    list-style-type: square;
+    margin: 0;
+}
 
 main {
     width: 70vw;
