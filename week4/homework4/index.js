@@ -1,19 +1,20 @@
 /* eslint-disable */
+const Chalk = require('chalk');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 // const router = express.Router();
 
 const UserService = require('./services/user-service');
+const DEFAULT_PORT = 3000;
+const PORT = process.env.PORT || DEFAULT_PORT;
 
-const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`server has started on port ${PORT === DEFAULT_PORT ? PORT : Chalk.bgYellowBright(PORT)}`);
+});
 
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
-
-app.listen(PORT, () => {
-  console.log(`server has started on port ${PORT}`);
-});
 
 app.get('/', (request, response) => {
   // response.sendFile(`${__dirname}/index.html`);
