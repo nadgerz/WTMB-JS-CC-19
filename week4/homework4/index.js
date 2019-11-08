@@ -2,29 +2,65 @@
 const Chalk = require('chalk');
 const bodyParser = require('body-parser');
 const express = require('express');
+const path = require('path');
+
+const UserService = require('./services/user-service');
+const userRoute = require('./routes/user');
 const app = express();
 // const router = express.Router();
 
-const UserService = require('./services/user-service');
-const DEFAULT_PORT = 3000;
-const PORT = process.env.PORT || DEFAULT_PORT;
+// MIDDLEWARE: the order of functions here matters
+// middleware funcs use three parameters
+// next is reference to the next func in the pipeline
+//
+app.use((req, res, next) => {
+  console.log(`${new Date().toString()} => ${req.originalUrl}`);
 
-app.listen(PORT, () => {
-  console.log(`server has started on port ${PORT === DEFAULT_PORT ? PORT : Chalk.bgYellowBright(PORT)}`);
+  // if you don't respond to req, you have to call next()
+  next();
 });
+
+// registering the custom route
+app.use(userRoute);
+// a way to serve static content (middleware)
+// will render the index.html file is nothing else is specified
+app.use(express.static('public'));
 
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 
-app.get('/', (request, response) => {
-  // response.sendFile(`${__dirname}/index.html`);
-  response.render('index');
+// Handler for 404
+app.use((req, res, next) => {
+
+  res.status(404).render(path.join(__dirname, './views/404'));
+
+  // res.status(404).send('404 you are lost');
+  // next();
 });
 
-app.get('/users', async (request, response) => {
+// Handler for 500
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.sendFile(path.join(__dirname, './public/500.html'));
+//   // next();
+// });
+
+const DEFAULT_PORT = 3000;
+const PORT = process.env.PORT || DEFAULT_PORT;
+app.listen(PORT, () => {
+  console.info(`server has started on port ${PORT === DEFAULT_PORT ? PORT : Chalk.bgYellowBright(PORT)}`);
+});
+
+
+app.get('/', (req, res) => {
+  // res.sendFile(`${__dirname}/index.html`);
+  res.render('index');
+});
+
+app.get('/users', async (req, res) => {
 
   const users = await UserService.findAll();
-  response.render('users', { users });
+  res.render('users', { users });
 });
 
 app.get(`/user/:id`, async (request, response) => {
