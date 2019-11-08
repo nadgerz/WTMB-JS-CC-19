@@ -9,29 +9,29 @@ router.get('/users', async (req, res) => {
 });
 
 // GET a specific user
-router.get(`/user/:id`, async (request, response) => {
-  const id = request.params.id;
+router.get(`/user/:id`, async (req, res) => {
+  const id = req.params.id;
   const users = await UserService.findAll();
 
   if (id < 1 || id > users.length) {
     return;
   }
   const user = users[id - 1];
-  response.render('user', { user, users });
+  res.render('user', { user, users });
 });
 
 // ADD a user
 // axios.post('/new-user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
-router.post(`/new-user`, async (request, response) => {
-  const user = await UserService.add(request.body);
+router.post(`/new-user`, async (req, res) => {
+  const user = await UserService.add(req.body);
   if (!user) {
     return;
   }
-  response.render('user', { user });
+  res.render('user', { user });
 });
 
 // DELETE a user
-router.delete(`/del-user/:id`, async (request, response) => {
+router.delete(`/del-user/:id`, async (req, res) => {
   const id = request.params.id;
   const users = await UserService.findAll();
 
@@ -42,15 +42,15 @@ router.delete(`/del-user/:id`, async (request, response) => {
 
   await UserService.delete(user.id);
 
-  response.send('ok');
-  // response.render('users', { users });
+  res.send('ok');
+  // res.render('users', { users });
 });
 
 // ADD a new recipe for a specific user
 // axios.post('/user/6/new-recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})
-router.post(`/user/:id/new-recipe`, async (request, response) => {
-  const id = request.params.id;
-  const { title, version } = request.body;
+router.post(`/user/:id/new-recipe`, async (req, res) => {
+  const id = req.params.id;
+  const { title, version } = req.body;
   const users = await UserService.findAll();
 
   if (id < 1 || id > users.length) {
@@ -61,12 +61,12 @@ router.post(`/user/:id/new-recipe`, async (request, response) => {
   user.saveRecipe(title, version);
   await UserService.update(user);
 
-  response.redirect(`/user/${id}`);
+  res.redirect(`/user/${id}`);
 });
 
 // get a recipe for a specific user
-router.get(`/user/:id/recipe/:rid`, async (request, response) => {
-  const { id, rid } = request.params;
+router.get(`/user/:id/recipe/:rid`, async (req, res) => {
+  const { id, rid } = req.params;
   const users = await UserService.findAll();
 
   if (id < 1 || id > users.length) {
@@ -76,20 +76,19 @@ router.get(`/user/:id/recipe/:rid`, async (request, response) => {
   const user = users[id - 1];
 
   if (rid < 1 || rid > user.recipes.length) {
-    response.send('out of bounds');
     return;
   }
 
   const recipeId = user.recipes[rid - 1].id;
   const recipe = user.getRecipeById(recipeId);
 
-  response.render('recipe', { recipe, user });
+  res.render('recipe', { recipe, user });
 });
 
 // DELETE a recipe for a user
 // axios.delete('user/6/recipe/1')
-router.delete(`/user/:id/recipe/:rid`, async (request, response) => {
-  const { id, rid } = request.params;
+router.delete(`/user/:id/recipe/:rid`, async (req, res) => {
+  const { id, rid } = req.params;
 
   const users = await UserService.findAll();
 
@@ -107,7 +106,7 @@ router.delete(`/user/:id/recipe/:rid`, async (request, response) => {
   user.deleteRecipeById(recipeId);
   await UserService.update(user);
 
-  response.render('user', { user });
+  res.render('user', { user });
 });
 
 
