@@ -11,7 +11,6 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 
 
-
 // registering the custom route
 app.use(userRoute);
 
