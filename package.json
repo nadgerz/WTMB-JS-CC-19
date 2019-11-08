@@ -2,11 +2,11 @@
   "name": "WTMBJSCC",
   "version": "1.0.0",
   "description": "## Women Techmakers Berlin JS Crash Course #4",
-  "main": "week4/homework4/index.js",
+  "main": "week4/homework4/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node week4/homework4/index.js",
-    "start-watch": "nodemon week4/homework4/index.js",
+    "start": "node week4/homework4/src/index.js",
+    "start-watch": "nodemon week4/homework4/src/index.js",
     "format": "pretty-quick --pattern \"**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
     "lint": "eslint \"**/*.{js,jsx}\" --quiet"
   },
