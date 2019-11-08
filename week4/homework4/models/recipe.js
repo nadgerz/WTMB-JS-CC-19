@@ -13,13 +13,20 @@ module.exports = class Recipe {
   }
 
   saveVersion(recipeDetails) {
+    // console.log('RECIPE');
     const allItems = this.versions;
     const lastItem = allItems[allItems.length - 1];
+    // const lastItem = (allItems.length > 0 ? allItems[allItems.length - 1] : 0 );
     const lastItemsId = (lastItem && lastItem.id) || 0;
 
     let version = new Version(recipeDetails, lastItemsId + 1);
 
-    if (recipeDetails.ingredients.length > 0) {
+    // console.log(version.ingredients);
+    // console.log('version.ingredients.length');
+    // console.log(version.ingredients.length);
+
+    // if ingredients were provided AND they're not just an empty array
+    if (recipeDetails.ingredients && recipeDetails.ingredients.length > 0) {
       version.saveIngredients(recipeDetails.ingredients);
     }
 
