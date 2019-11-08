@@ -2,9 +2,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+// const router = express.Router();
 
 const UserService = require('./services/user-service');
-// const User = require('./models/user');
 
 
 app.set('view engine', 'pug');
@@ -54,7 +54,7 @@ app.delete(`/del-user/:id`, async (request, response) => {
     response.send('out of bounds');
     return;
   }
-  const user = users[id-1];
+  const user = users[id - 1];
 
   await UserService.delete(user.id);
 
@@ -62,25 +62,45 @@ app.delete(`/del-user/:id`, async (request, response) => {
   // response.render('users', { users });
 });
 
+// axios.post('/user/6/new-recipe',{title: 'Cat Food', version: {servingSize: 1}})
 app.post(`/user/:id/new-recipe`, async (request, response) => {
   const id = request.params.id;
-  const recipeTitle = (request.body.title);
-  const version = (request.body.version);
+  const { title, version } = request.body;
   const users = await UserService.findAll();
-
-  // console.log(recipeTitle, version);
 
   if (id < 1 || id > users.length) {
     response.send('out of bounds');
     return;
   }
 
-  const user = users[id-1];
-  user.saveRecipe(recipeTitle, version);
-  // console.log(user.recipes);
+  const user = users[id - 1];
+  user.saveRecipe(title, version);
   await UserService.update(user);
-  //
+
   response.render('user', { user });
+});
+
+app.delete(`/user/:id/recipe/:rid`, async (request, response) => {
+  const { id, rid } = request.params;
+  // console.log(request.params.id, request.params.rid);
+  // console.log(request.params);
+  console.log('params');
+  console.log(id, rid);
+
+  // const version = (request.body.version);
+  // const users = await UserService.findAll();
+  //
+  // if (id < 1 || id > users.length) {
+  //   response.send('out of bounds');
+  //   return;
+  // }
+  //
+  // const user = users[id-1];
+  // user.saveRecipe(recipeTitle, version);
+  // await UserService.update(user);
+  //
+  // response.render('user', { user });
+  response.send(request.params);
 });
 
 
