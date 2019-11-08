@@ -82,25 +82,27 @@ app.post(`/user/:id/new-recipe`, async (request, response) => {
 
 app.delete(`/user/:id/recipe/:rid`, async (request, response) => {
   const { id, rid } = request.params;
-  // console.log(request.params.id, request.params.rid);
-  // console.log(request.params);
-  console.log('params');
-  console.log(id, rid);
 
-  // const version = (request.body.version);
-  // const users = await UserService.findAll();
-  //
-  // if (id < 1 || id > users.length) {
-  //   response.send('out of bounds');
-  //   return;
-  // }
-  //
-  // const user = users[id-1];
-  // user.saveRecipe(recipeTitle, version);
-  // await UserService.update(user);
-  //
-  // response.render('user', { user });
-  response.send(request.params);
+  const users = await UserService.findAll();
+
+  if (id < 1 || id > users.length) {
+    response.send('out of bounds');
+    console.log('out of bounds');
+    return;
+  }
+
+  const user = users[id - 1];
+
+  if (rid < 1 || rid > user.recipes.length) {
+    response.send('out of bounds');
+    return;
+  }
+
+  const recipeId = user.recipes[rid - 1].id;
+  user.deleteRecipeById(recipeId);
+  await UserService.update(user);
+
+  response.render('user', { user });
 });
 
 
