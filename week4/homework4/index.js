@@ -6,12 +6,13 @@ const app = express();
 
 const UserService = require('./services/user-service');
 
+const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 
-app.listen(3000, () => {
-  console.log('listening');
+app.listen(PORT, () => {
+  console.log(`server has started on port ${PORT}`);
 });
 
 app.get('/', (request, response) => {
