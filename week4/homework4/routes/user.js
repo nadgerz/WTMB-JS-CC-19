@@ -14,11 +14,10 @@ router.get(`/user/:id`, async (request, response) => {
   const users = await UserService.findAll();
 
   if (id < 1 || id > users.length) {
-    response.render('404');
     return;
   }
   const user = users[id - 1];
-  response.render('user', { user });
+  response.render('user', { user, users });
 });
 
 router.post(`/new-user`, async (request, response) => {
@@ -81,11 +80,9 @@ router.get(`/user/:id/recipe/:rid`, async (request, response) => {
   }
 
   const recipeId = user.recipes[rid - 1].id;
-  const recipe = users.getRecipeById(recipeId);
-  console.log(recipe);
+  const recipe = user.getRecipeById(recipeId);
 
-  // response.render('recipe', { recipe });
-  response.send(recipe);
+  response.render('recipe', { recipe, user });
 });
 
 router.delete(`/user/:id/recipe/:rid`, async (request, response) => {
