@@ -116,6 +116,11 @@ hr {
     /*margin: 5rem 0;*/
 }
 
+.button:hover {
+    background-color: rosybrown;
+    color: lavenderblush;
+}
+
 .button.secondary {
     /*background-color: blanchedalmond;*/
     /*color: darkslategray;*/
@@ -125,9 +130,13 @@ hr {
     padding: .7rem 1.5rem;
     -moz-border-radius-bottomright: 20%;
     border-radius: 0 0 20px 0;
-
 }
 
 a {
     color: darkslategray;
+}
+
+a:hover {
+    color: rosybrown;
+    font-weight: bold;
 }
