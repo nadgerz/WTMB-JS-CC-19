@@ -45,7 +45,7 @@ router.delete(`/del-user/:id`, async (request, response) => {
   // response.render('users', { users });
 });
 
-// axios.post('/user/6/new-recipe',{title: 'Cat Food', version: {servingSize: 1}})
+// axios.post('/user/6/new-recipe',{title: 'Wet Cat Food', version: {servingSize: 1}})
 router.post(`/user/:id/new-recipe`, async (request, response) => {
   const id = request.params.id;
   const { title, version } = request.body;
@@ -60,7 +60,7 @@ router.post(`/user/:id/new-recipe`, async (request, response) => {
   user.saveRecipe(title, version);
   await UserService.update(user);
 
-  response.render('user', { user });
+  response.redirect(`/user/${id}`);
 });
 
 router.get(`/user/:id/recipe/:rid`, async (request, response) => {
