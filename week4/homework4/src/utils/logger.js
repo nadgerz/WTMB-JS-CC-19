@@ -1,4 +1,4 @@
-/* eslint-disabl */
+/* eslint-disable */
 let debug = false;
 debug = true;
 
