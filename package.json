@@ -5,8 +5,10 @@
   "main": "week4/homework4/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "pretty-quick --pattern \"src/**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+    "start": "node week4/homework4/index.js",
+    "start-watch": "nodemon week4/homework4/index.js",
+    "format": "pretty-quick --pattern \"/**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
+    "lint": "eslint \"/**/*.{js,jsx}\" --quiet"
   },
   "keywords": [],
   "author": "Kerstin",
