@@ -32,7 +32,7 @@ router.post(`/new-user`, async (req, res) => {
 
 // DELETE a user
 router.delete(`/del-user/:id`, async (req, res) => {
-  const id = request.params.id;
+  const id = req.params.id;
   const users = await UserService.findAll();
 
   if (id < 1 || id > users.length) {
@@ -108,6 +108,5 @@ router.delete(`/user/:id/recipe/:rid`, async (req, res) => {
 
   res.render('user', { user });
 });
-
 
 module.exports = router;
