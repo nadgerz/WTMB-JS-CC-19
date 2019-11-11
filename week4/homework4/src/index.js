@@ -4,29 +4,26 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
 const userRoute = require('./routes/user');
-
 const app = express();
-app.set('views', __dirname + '/views');
+
 app.set('view engine', 'pug');
-app.use(bodyParser.json());
+app.use(express.json());
 
-
-// registering the custom route
-app.use(userRoute);
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 // will render the index.html file if nothing else is specified
 app.use(express.static(__dirname + 'public'));
+
+// registering the custom route
+app.use(userRoute);
 
 const DEFAULT_PORT = 3000;
 const PORT = process.env.PORT || DEFAULT_PORT;
 app.listen(PORT, () => {
   console.info(`server has started on port ${PORT === DEFAULT_PORT ? PORT : Chalk.bgYellowBright(PORT)}`);
 });
-
-app.get('/', (req, res) => {
-  res.render('index');
-});
-
 
 // those two should be at the BOTTOM(!!) of this page
 //

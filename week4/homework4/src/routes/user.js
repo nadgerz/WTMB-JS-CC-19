@@ -21,8 +21,8 @@ router.get(`/user/:id`, async (req, res) => {
 });
 
 // ADD a user
-// axios.post('/new-user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
-router.post(`/new-user`, async (req, res) => {
+// axios.post('/user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
+router.post(`/user`, async (req, res) => {
   const user = await UserService.add(req.body);
   if (!user) {
     return;
@@ -31,7 +31,8 @@ router.post(`/new-user`, async (req, res) => {
 });
 
 // DELETE a user
-router.delete(`/del-user/:id`, async (req, res) => {
+
+router.delete(`/user/:id`, async (req, res) => {
   const id = req.params.id;
   const users = await UserService.findAll();
 
@@ -47,8 +48,8 @@ router.delete(`/del-user/:id`, async (req, res) => {
 });
 
 // ADD a new recipe for a specific user
-// axios.post('/user/6/new-recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})
-router.post(`/user/:id/new-recipe`, async (req, res) => {
+// axios.post('/user/6/recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})
+router.post(`/user/:id/recipe`, async (req, res) => {
   const id = req.params.id;
   const { title, version } = req.body;
   const users = await UserService.findAll();
