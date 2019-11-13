@@ -4,7 +4,7 @@ require('./mongoose-connection');
 const personRouter = require('./routes/person');
 const meetupRouter = require('./routes/meetup');
 
-const app = bexpress();
+const app = express();
 
 
 app.set('view engine', 'pug');

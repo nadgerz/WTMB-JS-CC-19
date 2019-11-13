@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h2 #{users.length} User#{users.length === 1 ? '' : 's'} in the DB:
+    hr
+    ol.users
+        each user in users
+            li
+                a(href=`/user/${(users.findIndex(u => u.id === user.id)+1)}`) #{user.name}
+            p #{user.recipes.length} recipe#{user.recipes.length === 1 ? '' : 's'} stored
