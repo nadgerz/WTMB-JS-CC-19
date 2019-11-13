@@ -29,8 +29,16 @@ app.use('/user', userRoute);
 
 // Handler for 404 error
 app.use((req, res, next) => {
-  // res.status(HttpStatus.BAD_REQUEST).render(HttpStatus.getStatusCode('Bad Request'));
-  res.status(HttpStatus.BAD_REQUEST).render(HttpStatus.getStatusText(418));
+  switch (req.url) {
+    case '/bibble':
+      res.status(HttpStatus.IM_A_TEAPOT).send(HttpStatus.getStatusText(418));
+      break;
+
+    default:
+      res
+        .status(HttpStatus.NOT_FOUND)
+        .render(HttpStatus.getStatusCode('Not Found') + '');
+  }
 
   // next();
 });
@@ -39,7 +47,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
 
-  res.sendFile(path.join(__dirname, './public/500.html'));
+  res.sendFile(path.join(__dirname, '../public/500.html'));
 });
 
 // Start up the server, on a customer port, if required.
