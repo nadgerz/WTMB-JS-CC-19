@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const HttpStatus = require('http-status-codes');
-
 const UserService = require('../services/user-service');
 
 // @route    GET /user/test
@@ -15,29 +14,16 @@ router.get('/test', (req, res) => res.send('Test route for users [GET]'));
 router.post('/test', (req, res) => {
   console.log(req.body);
 
-  /*
-  res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
-    error: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR),
-  });
-    */
-
-  /*
-  res.status(HttpStatus.getStatusCode('Server Error')).send({
-    error: 'Server Error',
-  });
-    */
-
   res.status(HttpStatus.OK).send('Test route for users [POST]');
 });
 
-// GET all users
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
   const users = await UserService.findAll();
   res.render('users', { users });
 });
 
 // GET a specific user
-router.get(`/user/:id`, async (req, res) => {
+router.get(`/:id`, async (req, res) => {
   const id = req.params.id;
   const users = await UserService.findAll();
 
@@ -50,17 +36,19 @@ router.get(`/user/:id`, async (req, res) => {
 
 // ADD a user
 // axios.post('/user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
-router.post(`/user`, async (req, res) => {
-  const user = await UserService.add(req.body);
-  if (!user) {
-    return;
+router.post(`/`, async (req, res) => {
+  try {
+    const user = await UserService.add(req.body);
+    res.send(user);
+    // res.render('user', { user });
+  } catch (err) {
+    console.error(err.message);
   }
-  res.render('user', { user });
 });
 
 // DELETE a user
 
-router.delete(`/user/:id`, async (req, res) => {
+router.delete(`/:id`, async (req, res) => {
   const id = req.params.id;
   const users = await UserService.findAll();
 
@@ -77,7 +65,7 @@ router.delete(`/user/:id`, async (req, res) => {
 
 // ADD a new recipe for a specific user
 // axios.post('/user/6/recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})
-router.post(`/user/:id/recipe`, async (req, res) => {
+router.post(`/:id/recipe`, async (req, res) => {
   const id = req.params.id;
   const { title, version } = req.body;
   const users = await UserService.findAll();
@@ -94,7 +82,7 @@ router.post(`/user/:id/recipe`, async (req, res) => {
 });
 
 // get a recipe for a specific user
-router.get(`/user/:id/recipe/:rid`, async (req, res) => {
+router.get(`/:id/recipe/:rid`, async (req, res) => {
   const { id, rid } = req.params;
   const users = await UserService.findAll();
 
@@ -116,7 +104,7 @@ router.get(`/user/:id/recipe/:rid`, async (req, res) => {
 
 // DELETE a recipe for a user
 // axios.delete('user/6/recipe/1')
-router.delete(`/user/:id/recipe/:rid`, async (req, res) => {
+router.delete(`/:id/recipe/:rid`, async (req, res) => {
   const { id, rid } = req.params;
 
   const users = await UserService.findAll();

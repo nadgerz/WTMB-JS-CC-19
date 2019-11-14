@@ -1,11 +1,9 @@
 /* eslint-disable */
 const Chalk = require('chalk');
-// const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
 const HttpStatus = require('http-status-codes');
-
-const userRoute = require('./routes/user');
+require('./db-connection');
 
 const app = express();
 
@@ -21,13 +19,10 @@ app.get('/', (req, res) => {
 app.use(express.static(__dirname + 'public'));
 
 // Registering the custom routes
-app.use('/user', userRoute);
-// app.use('/user', require('./routes/user')); // alternative syntax
+app.use('/user', require('./routes/user'));
 
-//
-// These two route handlers should come last.
-
-// Handler for 404 error
+// TODO: add render for error.pug (tbd)
+// Handler for any error
 app.use((req, res, next) => {
   switch (req.url) {
     case '/bibble':
@@ -41,13 +36,6 @@ app.use((req, res, next) => {
   }
 
   // next();
-});
-
-// Handler for 500 error
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-
-  res.sendFile(path.join(__dirname, '../public/500.html'));
 });
 
 // Start up the server, on a customer port, if required.
