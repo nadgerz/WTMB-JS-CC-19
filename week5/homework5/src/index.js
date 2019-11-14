@@ -3,6 +3,7 @@ const Chalk = require('chalk');
 const express = require('express');
 const path = require('path');
 const HttpStatus = require('http-status-codes');
+require('./db-connection');
 
 const app = express();
 
@@ -20,7 +21,6 @@ app.use(express.static(__dirname + 'public'));
 // Registering the custom routes
 app.use('/user', require('./routes/user'));
 
-
 // TODO: add render for error.pug (tbd)
 // Handler for any error
 app.use((req, res, next) => {
@@ -37,7 +37,6 @@ app.use((req, res, next) => {
 
   // next();
 });
-
 
 // Start up the server, on a customer port, if required.
 const DEFAULT_PORT = 3000;

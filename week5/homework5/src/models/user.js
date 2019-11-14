@@ -1,50 +1,31 @@
-const uuid = require('uuid/v1');
-const Recipe = require('./recipe');
-// const UserService = require('../services/user-service');
+const mongoose = require('mongoose');
 
-module.exports = class User {
-  constructor(name, email, password, id, recipes = []) {
-    this.name = name;
-    this.id = id || uuid();
-    this.email = email;
-    this.password = password;
+// const Recipe = require('./recipe');
 
-    this.recipes = recipes;
-  }
+const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minLength: 2,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  // recipes: [{
+  //   type: mongoose.SchemaTypes.ObjectId,
+  //   ref: 'Meetup',
+  //   autopopulate: {
+  //     maxDepth: 1,
+  //   },
+  // }],
+});
 
-  saveRecipe(title, version) {
-    const recipe = new Recipe(title);
-    recipe.saveVersion(version);
+// UserSchema.plugin(require('mongoose-autopopulate'));
 
-    if (this.titleExists(title)) {
-      console.log('no recipe title duplicate allowed');
-      return;
-    }
+const UserModel = mongoose.model('user', UserSchema);
 
-    this.recipes.push(recipe);
-  }
-
-  titleExists(title) {
-    return this.recipes.map(recipe => recipe.title).includes(title);
-  }
-
-  deleteRecipeById(id) {
-    this.recipes = this.recipes.filter(recipe => recipe.id !== id);
-  }
-
-  getRecipeById(id) {
-    const recipeIndex = this.recipes.findIndex(recipe => recipe.id === id);
-    return this.recipes[recipeIndex];
-  }
-
-  static create({ name, email, password, id, recipes }) {
-    const user = new User(name, email, password, id);
-
-    user.recipes = recipes.map(recipe => Recipe.create(recipe));
-
-    return user;
-  }
-};
+module.exports = UserModel;
 
 // $ node test.js
 // [Function: Bibble]
