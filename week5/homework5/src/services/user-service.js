@@ -8,8 +8,13 @@ class UserService extends BaseService {
     super(UserModel);
   }
 
-  async add() {
+  async add(user) {
     console.log('userService: add');
+    const exists = await super.find({email: user.email});
+    if(exists.length > 0){
+      return null;
+    }
+    return await super.add(user);
   }
 
   // async add({name, email, password}) {
