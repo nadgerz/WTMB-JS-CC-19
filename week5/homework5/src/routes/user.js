@@ -37,11 +37,13 @@ router.get(`/:id`, async (req, res) => {
 // ADD a user
 // axios.post('/user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
 router.post(`/`, async (req, res) => {
-  const user = await UserService.add(req.body);
-  if (!user) {
-    return;
+  try {
+    const user = await UserService.add(req.body);
+    res.send( user );
+    // res.render('user', { user });
+  } catch (err) {
+    console.error(err.message);
   }
-  res.render('user', { user });
 });
 
 // DELETE a user
