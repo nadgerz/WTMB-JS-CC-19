@@ -11,12 +11,16 @@ module.exports = class Service {
     return this.model.create(item);
   }
 
-  async del(itemId) {
-    return this.model.remove({ _id: itemId });
+  async deleteById(id) {
+    return this.model.deleteOne({ _id: id });
   }
 
-  async findById(itemId) {
-    return this.model.findById(itemId);
+  async delete(query) {
+    return this.model.deleteMany(query);
+  }
+
+  async findById(id) {
+    return this.model.findById(id);
   }
 
   async find(query) {
