@@ -1,6 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const HttpStatus = require('http-status-codes');
+
 const UserService = require('../services/user-service');
+
+// @route    GET /user/test
+// @desc     Test route
+// @access   Public
+router.get('/test', (req, res) => res.send('Test route for users [GET]'));
+
+// @route    POST /user/test
+// @desc     Register user
+// @access   Public
+router.post('/test', (req, res) => {
+  console.log(req.body);
+
+  /*
+  res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+    error: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR),
+  });
+    */
+
+  /*
+  res.status(HttpStatus.getStatusCode('Server Error')).send({
+    error: 'Server Error',
+  });
+    */
+
+  res.status(HttpStatus.OK).send('Test route for users [POST]');
+});
 
 // GET all users
 router.get('/users', async (req, res) => {
