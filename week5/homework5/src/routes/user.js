@@ -17,20 +17,20 @@ router.post('/test', (req, res) => {
   res.status(HttpStatus.OK).send('Test route for users [POST]');
 });
 
-router.get('/', async (req, res) => {
+// @route    GET /user/all
+// @desc
+// @access   Public
+router.get('/all', async (req, res) => {
   const users = await UserService.findAll();
-  res.render('users', { users });
+  res.send(users);
+  // res.render('users', { users });
 });
 
 // GET a specific user
 router.get(`/:id`, async (req, res) => {
   const id = req.params.id;
-  const users = await UserService.findAll();
+  const user = await UserService.findById(id);
 
-  if (id < 1 || id > users.length) {
-    return;
-  }
-  const user = users[id - 1];
   res.render('user', { user, users });
 });
 
