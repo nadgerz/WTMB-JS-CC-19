@@ -8,9 +8,9 @@ async function test() {
   // POST a user
   try {
     result = await axios.post(`${server}/user`, {
-      name: 'Antonia',
-      email: 'Antonia@mail',
-      password: 'amamamamamamaama'
+      name: 'Steve',
+      email: 'Stevo@mail',
+      password: 'nadgerz'
     });
 
     console.log(result.data);
