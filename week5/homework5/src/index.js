@@ -20,6 +20,7 @@ app.use(express.static(__dirname + 'public'));
 
 // Registering the custom routes
 app.use('/user', require('./routes/user'));
+app.use('/recipe', require('./routes/recipe'));
 
 // TODO: add render for error.pug (tbd)
 // Handler for any error
@@ -34,7 +35,6 @@ app.use((req, res, next) => {
         .status(HttpStatus.NOT_FOUND)
         .render(HttpStatus.getStatusCode('Not Found') + '');
   }
-
   // next();
 });
 
