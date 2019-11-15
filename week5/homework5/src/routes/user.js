@@ -39,7 +39,7 @@ router.get(`/:id`, async (req, res) => {
 router.post(`/`, async (req, res) => {
   try {
     const user = await UserService.add(req.body);
-    res.send( user );
+    res.send(user);
     // res.render('user', { user });
   } catch (err) {
     console.error(err.message);

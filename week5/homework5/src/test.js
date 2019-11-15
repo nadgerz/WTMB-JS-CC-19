@@ -2,14 +2,20 @@ require('./db-connection');
 const axios = require('axios');
 const server = 'http://localhost:3000';
 
-let result;
-try {
-  result = axios.post(`${server}/user`, { name: 'Steeeeve', email: 'hmail' })
-    .then((json) => console.log(json.data))
-    .catch(console.error);
-  process.exit(0);
-  // console.log(result);
+async function test() {
+  let result;
+  try {
+    result = await axios.post(`${server}/user`, {
+      name: 'Steve',
+      email: 'gmail',
+    });
 
-} catch (err) {
-  console.log(err.message);
+    console.log(result.data);
+
+    process.exit(0);
+  } catch (err) {
+    console.log(err.message);
+  }
 }
+
+test();

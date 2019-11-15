@@ -10,8 +10,8 @@ class UserService extends BaseService {
 
   async add(user) {
     console.log('userService: add');
-    const exists = await super.find({email: user.email});
-    if(exists.length > 0){
+    const exists = await super.find({ email: user.email });
+    if (exists.length > 0) {
       return null;
     }
     return await super.add(user);
