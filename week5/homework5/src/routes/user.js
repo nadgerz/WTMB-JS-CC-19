@@ -14,6 +14,7 @@ router.get('/test', (req, res) => res.send('Test route for users [GET]'));
 router.post('/test', (req, res) => {
   console.log(req.body);
 
+  // TODO SAI: dunno what todo wit this statuses
   res.status(HttpStatus.OK).send('Test route for users [POST]');
 });
 
@@ -26,12 +27,15 @@ router.get('/all', async (req, res) => {
   // res.render('users', { users });
 });
 
-// GET a specific user
+// @route    GET /user/:id
+// @desc
+// @access   Public
 router.get(`/:id`, async (req, res) => {
   const id = req.params.id;
   const user = await UserService.findById(id);
 
-  res.render('user', { user, users });
+  res.send(user);
+  // res.render('user', { user, users });
 });
 
 // ADD a user
