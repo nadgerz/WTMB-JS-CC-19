@@ -51,18 +51,15 @@ router.post(`/`, async (req, res) => {
   }
 });
 
-// DELETE a user
-
+// @route    DELETE /user/:id
+// @desc
+// @access   Public
 router.delete(`/:id`, async (req, res) => {
   const id = req.params.id;
-  const users = await UserService.findAll();
+  await UserService.deleteById(id);
 
-  if (id < 1 || id > users.length) {
-    return;
-  }
-  const user = users[id - 1];
-
-  await UserService.delete(user.id);
+  console.log(typeof req);
+  console.log(req);
 
   res.send('ok');
   // res.render('users', { users });
