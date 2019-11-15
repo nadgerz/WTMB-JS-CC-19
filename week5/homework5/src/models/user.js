@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6,
+  },
   // recipes: [{
   //   type: mongoose.SchemaTypes.ObjectId,
   //   ref: 'Meetup',

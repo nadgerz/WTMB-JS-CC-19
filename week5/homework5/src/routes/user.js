@@ -14,28 +14,43 @@ router.get('/test', (req, res) => res.send('Test route for users [GET]'));
 router.post('/test', (req, res) => {
   console.log(req.body);
 
+  // TODO SAI: dunno what todo wit this statuses
   res.status(HttpStatus.OK).send('Test route for users [POST]');
 });
 
-router.get('/', async (req, res) => {
+// @route    GET /user/all
+// @desc
+// @access   Public
+router.get('/all', async (req, res) => {
   const users = await UserService.findAll();
-  res.render('users', { users });
+  res.send(users);
+  // res.render('users', { users });
 });
 
-// GET a specific user
+// @route    DELETE /user/all
+// @desc
+// @access   Public
+router.delete('/all', async (req, res) => {
+  await UserService.delete();
+  console.log(await UserService.find().length);
+
+  res.send('USERS PURGED');
+});
+
+// @route    GET /user/:id
+// @desc
+// @access   Public
 router.get(`/:id`, async (req, res) => {
   const id = req.params.id;
-  const users = await UserService.findAll();
+  const user = await UserService.findById(id);
 
-  if (id < 1 || id > users.length) {
-    return;
-  }
-  const user = users[id - 1];
-  res.render('user', { user, users });
+  res.send(user);
+  // res.render('user', { user, users });
 });
 
-// ADD a user
-// axios.post('/user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
+// @route    POST /user/:id
+// @desc
+// @access   Public
 router.post(`/`, async (req, res) => {
   try {
     const user = await UserService.add(req.body);
@@ -46,18 +61,15 @@ router.post(`/`, async (req, res) => {
   }
 });
 
-// DELETE a user
-
+// @route    DELETE /user/:id
+// @desc
+// @access   Public
 router.delete(`/:id`, async (req, res) => {
   const id = req.params.id;
-  const users = await UserService.findAll();
+  await UserService.deleteById(id);
 
-  if (id < 1 || id > users.length) {
-    return;
-  }
-  const user = users[id - 1];
-
-  await UserService.delete(user.id);
+  console.log(typeof req);
+  console.log(req);
 
   res.send('ok');
   // res.render('users', { users });
