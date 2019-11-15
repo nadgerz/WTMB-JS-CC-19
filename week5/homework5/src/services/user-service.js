@@ -5,10 +5,6 @@ const UserModel = require('../models/user');
 
 class UserService extends BaseService {
   model = UserModel;
-  //
-  // constructor() {
-  //   super(UserModel);
-  // }
 
   async add(user) {
     console.log('userService: add');
