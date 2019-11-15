@@ -1,11 +1,12 @@
 /* eslint-disable */
 const Chalk = require('chalk');
 const express = require('express');
+const connectDB = require('../config/db');
 const path = require('path');
 const HttpStatus = require('http-status-codes');
-require('./db-connection');
 
 const app = express();
+connectDB();
 
 // Init Middleware
 app.set('view engine', 'pug');
