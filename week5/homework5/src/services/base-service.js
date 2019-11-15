@@ -3,27 +3,41 @@ module.exports = class Service {
     this.model = model;
   }
 
-  async findAll() {
-    return this.model.find();
+  update() {
+    return this.model.save();
   }
 
-  async add(item) {
+  resolved(result) {
+    console.log('Resolved');
+  }
+
+  rejected(result) {
+    console.error(result);
+  }
+
+  findAll() {
+    // return this.model.find();
+    return Promise.reject(new Error('fail')).catch(console.error);
+    // return new Promise.reject(new Error('BOOOOO'));
+  }
+
+  add(item) {
     return this.model.create(item);
   }
 
-  async deleteById(id) {
+  deleteById(id) {
     return this.model.deleteOne({ _id: id });
   }
 
-  async delete(query) {
+  delete(query) {
     return this.model.deleteMany(query);
   }
 
-  async findById(id) {
+  findById(id) {
     return this.model.findById(id);
   }
 
-  async find(query) {
+  find(query) {
     return this.model.find(query);
   }
 

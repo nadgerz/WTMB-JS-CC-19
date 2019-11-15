@@ -4,9 +4,7 @@ const BaseService = require('./base-service');
 const UserModel = require('../models/user');
 
 class UserService extends BaseService {
-  constructor() {
-    super(UserModel);
-  }
+  model = UserModel;
 
   async add(user) {
     console.log('userService: add');
@@ -27,17 +25,3 @@ class UserService extends BaseService {
 }
 
 module.exports = new UserService();
-
-//class PersonService extends BaseService {
-//   // model = PersonModel;
-//   constructor() {
-//     super(PersonModel);
-//   }
-//
-//   async attendMeetup(person, meetup) {
-//     person.meetups.push(meetup);
-//     meetup.attendees.push(person);
-//     await person.save();
-//     await meetup.save();
-//   }
-// }

@@ -14,7 +14,6 @@ router.get('/test', (req, res) => res.send('Test route for users [GET]'));
 router.post('/test', (req, res) => {
   console.log(req.body);
 
-  // TODO SAI: dunno what todo wit this statuses
   res.status(HttpStatus.OK).send('Test route for users [POST]');
 });
 
@@ -22,8 +21,12 @@ router.post('/test', (req, res) => {
 // @desc
 // @access   Public
 router.get('/all', async (req, res) => {
-  const users = await UserService.findAll();
-  res.send(users);
+  try {
+    const users = await UserService.findAll();
+    res.send(users);
+  } catch (err) {
+    res.status(418).send('Database down');
+  }
   // res.render('users', { users });
 });
 

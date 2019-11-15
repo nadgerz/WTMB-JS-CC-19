@@ -1,11 +1,12 @@
 /* eslint-disable */
 const Chalk = require('chalk');
 const express = require('express');
+const connectDB = require('../config/db');
 const path = require('path');
 const HttpStatus = require('http-status-codes');
-require('./db-connection');
 
 const app = express();
+connectDB();
 
 // Init Middleware
 app.set('view engine', 'pug');
@@ -20,6 +21,7 @@ app.use(express.static(__dirname + 'public'));
 
 // Registering the custom routes
 app.use('/user', require('./routes/user'));
+app.use('/recipe', require('./routes/recipe'));
 
 // TODO: add render for error.pug (tbd)
 // Handler for any error
@@ -34,7 +36,6 @@ app.use((req, res, next) => {
         .status(HttpStatus.NOT_FOUND)
         .render(HttpStatus.getStatusCode('Not Found') + '');
   }
-
   // next();
 });
 
