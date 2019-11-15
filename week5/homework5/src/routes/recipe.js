@@ -20,8 +20,8 @@ router.post('/test', (req, res) => {
 // @desc
 // @access   Public
 router.get('/all', async (req, res) => {
-  const users = await RecipeService.findAll();
-  res.send(users);
+  const recipes = await RecipeService.findAll();
+  res.send(recipes);
   // res.render('users', { users });
 });
 
