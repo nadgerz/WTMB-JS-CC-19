@@ -6,19 +6,19 @@ async function test() {
   let result;
 
   // POST a user
-  try {
-    result = await axios.post(`${server}/user`, {
-      name: 'Steve',
-      email: 'Stevo@mail',
-      password: 'nadgerz'
-    });
-
-    console.log(result.data);
-
-    process.exit(0);
-  } catch (err) {
-    console.log(err.message);
-  }
+  // try {
+  //   result = await axios.post(`${server}/user`, {
+  //     name: 'Steve',
+  //     email: 'Stevo@mail',
+  //     password: 'nadgerz'
+  //   });
+  //
+  //   console.log(result.data);
+  //
+  //   process.exit(0);
+  // } catch (err) {
+  //   console.log(err.message);
+  // }
 
   // DELETE a user
   // let deleteId = '5dcd957a1b84429940c0e84d';
@@ -38,7 +38,37 @@ async function test() {
   //   console.error(err.message);
   // }
 
+//  TEST recipe GET + POST
+//   try {
+//     result = await axios.post(`${server}/recipe/test`);
+//     console.log(result.data);
+//
+//     process.exit(0);
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+//   try {
+//     result = await axios.get(`${server}/recipe/test`);
+//     console.log(result.data);
+//     process.exit(0);
+//   } catch (err) {
+//     console.log(err.message);
+//   }
 
+//  GET a recipe
+//   try {
+//     result = await axios.post(`${server}/recipe`, {
+//       title: 'Eggs',
+//     });
+//
+//     console.log(result.data);
+//
+//     process.exit(0);
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+
+//  POST a recipe
 }
 
 test();
