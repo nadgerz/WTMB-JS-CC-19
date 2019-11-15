@@ -38,8 +38,9 @@ router.get(`/:id`, async (req, res) => {
   // res.render('user', { user, users });
 });
 
-// ADD a user
-// axios.post('/user', {name: 'Fred', email: 'fred@mail.de', password: 'boondocks'})
+// @route    POST /user/:id
+// @desc
+// @access   Public
 router.post(`/`, async (req, res) => {
   try {
     const user = await UserService.add(req.body);
