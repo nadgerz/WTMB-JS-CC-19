@@ -9,9 +9,9 @@ const RecipeSchema = new mongoose.Schema({
     required: true,
     minLength: 2,
   },
-  dateCreated: {
-    default: Date.now(),
-  },
+  // dateCreated: {
+  //   default: Date.now,
+  // },
 
 // versions: [{
   //   type: mongoose.SchemaTypes.ObjectId,
