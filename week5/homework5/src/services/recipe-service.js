@@ -3,9 +3,11 @@ const RecipeModel = require('../models/recipe');
 
 
 class RecipeService extends BaseService {
-  constructor() {
-    super(RecipeModel);
-  }
+  model = RecipeModel;
+
+  // constructor() {
+  //   super(RecipeModel);
+  // }
 }
 
 module.exports = new RecipeService();
