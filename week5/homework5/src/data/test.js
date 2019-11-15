@@ -1,9 +1,19 @@
-require('../db-connection');
 const axios = require('axios');
+const connectDB = require('../../config/db');
+connectDB();
 const server = 'http://localhost:3000';
 
 async function test() {
   let result;
+
+  //
+  // let id = '5dce84cc05fd8f9f5e3239e1';
+  // let user = await axios.get(`${server}/user/${id}`);
+  // console.log(user);
+
+  // result = await
+  let users = await axios.get(`${server}/user/all`);
+  console.log(users.data);
 
   // POST a user
   // try {
