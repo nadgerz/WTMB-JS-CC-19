@@ -27,6 +27,16 @@ router.get('/all', async (req, res) => {
   // res.render('users', { users });
 });
 
+// @route    DELETE /user/all
+// @desc
+// @access   Public
+router.delete('/all', async (req, res) => {
+  await UserService.delete();
+  console.log(await UserService.find().length);
+
+  res.send('USERS PURGED');
+});
+
 // @route    GET /user/:id
 // @desc
 // @access   Public
@@ -64,6 +74,8 @@ router.delete(`/:id`, async (req, res) => {
   res.send('ok');
   // res.render('users', { users });
 });
+
+
 
 // ADD a new recipe for a specific user
 // axios.post('/user/6/recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})

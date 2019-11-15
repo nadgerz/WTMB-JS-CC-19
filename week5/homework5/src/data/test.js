@@ -20,13 +20,21 @@ async function test() {
   // }
 
   // DELETE a user
-  let deleteId = '5dcd957a1b84429940c0e84d';
-  try {
-    await axios.delete(`${server}/user/${deleteId}`);
+  // let deleteId = '5dcd957a1b84429940c0e84d';
+  // try {
+  //   await axios.delete(`${server}/user/${deleteId}`);
+  //
+  //   process.exit(0);
+  // } catch (err) {
+  //   console.error(err.message);
+  // }
 
+  // DELETE ALL users
+  try {
+    await axios.delete(`${server}/user/all`);
     process.exit(0);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
   }
 
 
