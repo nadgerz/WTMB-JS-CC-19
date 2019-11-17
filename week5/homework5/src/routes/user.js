@@ -23,11 +23,17 @@ router.post('/test', (req, res) => {
 router.get('/all', async (req, res) => {
   try {
     const users = await UserService.findAll();
+    console.log('USERS', users);
+
     res.send(users);
   } catch (err) {
+    // console.log('catch() in router.get');
+    // console.log(err.message);
+    // console.log(typeof err);
+    // console.log(err);
+
     res.status(418).send('Database down');
   }
-  // res.render('users', { users });
 });
 
 // @route    DELETE /user/all
@@ -60,7 +66,8 @@ router.post(`/`, async (req, res) => {
     res.send(user);
     // res.render('user', { user });
   } catch (err) {
-    console.error(err.message);
+    res.send(err.response.data.message);
+    res.status(418).send(err);
   }
 });
 
@@ -77,7 +84,6 @@ router.delete(`/:id`, async (req, res) => {
   res.send('ok');
   // res.render('users', { users });
 });
-
 
 // ADD a new recipe for a specific user
 // axios.post('/user/6/recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})
