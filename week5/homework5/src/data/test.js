@@ -12,7 +12,6 @@ async function test() {
   // let user = await axios.get(`${server}/user/${id}`);
   // console.log(user);
 
-  // result = await
   // try {
   //   let url = `${server}/user/all`;
   //   console.log(url);
@@ -26,15 +25,14 @@ async function test() {
   //   console.log(err.message);
   // }
 
-  // POST a user
+  // GET a user by name (query string)
   try {
-    result = await axios.post(`${server}/user`, {
-      name: 'Steve',
-      // email: 'Stevo@mail',
-      password: 'nadgerz'
-    });
+    result = await axios.get(`${server}/user`, {
+      params: {
+        name: 'Antonia'
+      }});
 
-    console.log(result.data);
+    console.log(result);
 
     process.exit(0);
   } catch (err) {
@@ -42,6 +40,23 @@ async function test() {
     console.log(err.response.data.message);
     // console.log(err.message);
   }
+
+  // POST a user
+  // try {
+  //   result = await axios.post(`${server}/user`, {
+  //     name: 'Steve',
+  //     // email: 'Stevo@mail',
+  //     password: 'nadgerz'
+  //   });
+  //
+  //   console.log(result.data);
+  //
+  //   process.exit(0);
+  // } catch (err) {
+  //   console.log('test.js POST');
+  //   console.log(err.response.data.message);
+  //   // console.log(err.message);
+  // }
 
   // DELETE a user
   // let deleteId = '5dcd957a1b84429940c0e84d';
@@ -62,20 +77,25 @@ async function test() {
   // }
 
   //  TEST recipe GET + POST
-  //   try {
-  //     result = await axios.post(`${server}/recipe/test`);
-  //     console.log(result.data);
+  // try {
+  //   result = await axios.post(`${server}/user/test`);
+  //   console.log('POST result data');
+  //   console.log(result.data);
   //
-  //     process.exit(0);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
+  //   process.exit(0);
+  // } catch (err) {
+  //   console.log('POST ERR');
+  //   console.log(err.response.data.message);
+  // }
+  //
   //   try {
-  //     result = await axios.get(`${server}/recipe/test`);
+  //     result = await axios.get(`${server}/user/test`);
+  //     console.log('GET result data');
   //     console.log(result.data);
   //     process.exit(0);
   //   } catch (err) {
-  //     console.log(err.message);
+  //     console.log('GET ERR');
+  //     console.log(err.response.data.message);
   //   }
 
   //  GET a recipe

@@ -12,7 +12,16 @@ router.get('/test', (req, res) => res.send('Test route for users [GET]'));
 // @desc     Register user
 // @access   Public
 router.post('/test', (req, res) => {
-  console.log(req.body);
+  // console.log('user route: REQ:');
+  // console.log(req);
+  // body, route {path, stack, methods}
+  // connection, socket, res : ServerResponse, params, query
+  // url, method, statusMessage
+
+  // console.log('user route: RES:');
+  // console.log(res);
+  // params, query, body, res, route, baseUrl: /user, originalUrl: /user/test, next(),
+  // url, method: POST,
 
   res.status(HttpStatus.OK).send('Test route for users [POST]');
 });
@@ -23,16 +32,28 @@ router.post('/test', (req, res) => {
 router.get('/all', async (req, res) => {
   try {
     const users = await UserService.findAll();
-    console.log('USERS', users);
-
+    // console.log('USERS', users);
     res.send(users);
-  } catch (err) {
-    // console.log('catch() in router.get');
-    // console.log(err.message);
-    // console.log(typeof err);
-    // console.log(err);
 
-    res.status(418).send('Database down');
+  } catch (err) {
+    res.send(err.response.data.message);
+    // res.status(418).send('Database down');
+  }
+});
+
+// @route    GET /user/?query
+// @desc
+// @access   Public
+router.get('/', async (req, res) => {
+  try {
+    const query = req.query;
+    const user = await UserService.find(query);
+
+    res.send(user);
+
+  } catch (err) {
+    res.send(err.response.data.message);
+    // res.status(418).send('Database down');
   }
 });
 
@@ -40,10 +61,12 @@ router.get('/all', async (req, res) => {
 // @desc
 // @access   Public
 router.delete('/all', async (req, res) => {
-  await UserService.delete();
-  console.log(await UserService.find().length);
-
-  res.send('USERS PURGED');
+  try {
+    await UserService.delete();
+    res.send('USERS PURGED');
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
 });
 
 // @route    GET /user/:id
@@ -51,10 +74,14 @@ router.delete('/all', async (req, res) => {
 // @access   Public
 router.get(`/:id`, async (req, res) => {
   const id = req.params.id;
-  const user = await UserService.findById(id);
+  try {
+    const user = await UserService.findById(id);
+    res.send(user);
+    // res.render('user', { user, users });
 
-  res.send(user);
-  // res.render('user', { user, users });
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
 });
 
 // @route    POST /user/:id
@@ -67,7 +94,7 @@ router.post(`/`, async (req, res) => {
     // res.render('user', { user });
   } catch (err) {
     res.send(err.response.data.message);
-    res.status(418).send(err);
+    // res.status(418).send(err);
   }
 });
 
@@ -76,13 +103,15 @@ router.post(`/`, async (req, res) => {
 // @access   Public
 router.delete(`/:id`, async (req, res) => {
   const id = req.params.id;
-  await UserService.deleteById(id);
-
   console.log(typeof req);
   console.log(req);
-
-  res.send('ok');
-  // res.render('users', { users });
+  try {
+    await UserService.deleteById(id);
+    // res.render('users', { users });
+    res.send('ok');
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
 });
 
 // ADD a new recipe for a specific user
