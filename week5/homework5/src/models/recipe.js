@@ -2,7 +2,6 @@
 // const RecipeService = require('../services/recipe-service');
 const mongoose = require('mongoose');
 
-
 const RecipeSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -13,7 +12,7 @@ const RecipeSchema = new mongoose.Schema({
   //   default: Date.now,
   // },
 
-// versions: [{
+  // versions: [{
   //   type: mongoose.SchemaTypes.ObjectId,
   //   ref: 'Version',
   //   autopopulate: {
@@ -27,7 +26,6 @@ const RecipeSchema = new mongoose.Schema({
 const RecipeModel = mongoose.model('recipe', RecipeSchema);
 
 module.exports = RecipeModel;
-
 
 // saveVersion(recipeDetails) {
 //   const allItems = this.versions;

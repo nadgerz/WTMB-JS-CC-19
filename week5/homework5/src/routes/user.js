@@ -34,7 +34,6 @@ router.get('/all', async (req, res) => {
     const users = await UserService.findAll();
     // console.log('USERS', users);
     res.send(users);
-
   } catch (err) {
     res.send(err.response.data.message);
     // res.status(418).send('Database down');
@@ -50,7 +49,6 @@ router.get('/', async (req, res) => {
     const user = await UserService.find(query);
 
     res.send(user);
-
   } catch (err) {
     res.send(err.response.data.message);
     // res.status(418).send('Database down');
@@ -78,7 +76,6 @@ router.get(`/:id`, async (req, res) => {
     const user = await UserService.findById(id);
     res.send(user);
     // res.render('user', { user, users });
-
   } catch (err) {
     res.send(err.response.data.message);
   }

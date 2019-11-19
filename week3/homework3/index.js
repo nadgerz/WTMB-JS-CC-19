@@ -23,7 +23,6 @@ async function main() {
   const [user1, user2, user3] = await UserService.findAll();
   // console.log(user1, user2, user3);
 
-
   // ADDING A RECIPE TO A USER
   // CREATING A VERSION FOR A RECIPE
   const eggVersion1 = {

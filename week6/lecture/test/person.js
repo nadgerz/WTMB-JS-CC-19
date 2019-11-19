@@ -27,15 +27,21 @@ test('Fetch a person', async t => {
     meetups: [],
   };
 
-  const mariaUserCreated = (await request(app)
-    .post('/person')
-    .send(personToCreate)).body;
+  const mariaUserCreated = (
+    await request(app)
+      .post('/person')
+      .send(personToCreate)
+  ).body;
 
-  const fetchRes = await request(app).get(`/person/${mariaUserCreated._id}/json`);
+  const fetchRes = await request(app).get(
+    `/person/${mariaUserCreated._id}/json`,
+  );
 
   t.is(fetchRes.status, 200);
 
-  const fetchResJson = await request(app).get(`/person/${mariaUserCreated._id}/json`);
+  const fetchResJson = await request(app).get(
+    `/person/${mariaUserCreated._id}/json`,
+  );
 
   t.is(fetchResJson.status, 200);
   const mariaUserFetched = fetchResJson.body;
@@ -47,11 +53,15 @@ test('Delete a person', async t => {
 
   const personToCreate = { name: 'Celia Gomez', age: 33, meetups: [] };
 
-  const celiaUserCreated = (await request(app)
-    .post('/person')
-    .send(personToCreate)).body;
+  const celiaUserCreated = (
+    await request(app)
+      .post('/person')
+      .send(personToCreate)
+  ).body;
 
-  const deleteRes = await request(app).delete(`/person/${celiaUserCreated._id}`);
+  const deleteRes = await request(app).delete(
+    `/person/${celiaUserCreated._id}`,
+  );
 
   t.is(deleteRes.status, 200);
   t.is(deleteRes.ok, true);

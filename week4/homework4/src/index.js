@@ -22,7 +22,11 @@ app.use(userRoute);
 const DEFAULT_PORT = 3000;
 const PORT = process.env.PORT || DEFAULT_PORT;
 app.listen(PORT, () => {
-  console.info(`server has started on port ${PORT === DEFAULT_PORT ? PORT : Chalk.bgYellowBright(PORT)}`);
+  console.info(
+    `server has started on port ${
+      PORT === DEFAULT_PORT ? PORT : Chalk.bgYellowBright(PORT)
+    }`,
+  );
 });
 
 // those two should be at the BOTTOM(!!) of this page

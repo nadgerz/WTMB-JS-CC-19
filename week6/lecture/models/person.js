@@ -11,13 +11,15 @@ const PersonSchema = new mongoose.Schema({
     required: true,
     min: 18,
   },
-  meetups: [{
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: 'Meetup',
-    autopopulate: {
-      maxDepth: 1,
+  meetups: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Meetup',
+      autopopulate: {
+        maxDepth: 1,
+      },
     },
-  }],
+  ],
 });
 
 PersonSchema.methods.findPeersOver18 = function(cb) {

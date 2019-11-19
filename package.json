@@ -8,6 +8,7 @@
     "start": "node week4/homework4/src/index.js",
     "start-watch": "nodemon week4/homework4/src/index.js",
     "format": "pretty-quick --pattern \"**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
+    "format:full": "prettier --write \"./**/*.{js,jsx,css,htm,json,ts,html,sass,scss}\"",
     "lint": "eslint \"**/*.{js,jsx}\" --quiet"
   },
   "keywords": [],

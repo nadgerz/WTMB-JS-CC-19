@@ -13,7 +13,6 @@ app.get('/', (request, response) => {
 });
 
 app.get('/person/all', async (request, response) => {
-
   const people = await PersonService.findAll();
   response.render('person', { people });
 });
@@ -28,14 +27,14 @@ app.get(`/person/:id`, async (request, response) => {
 app.post(`/person`, async (request, response) => {
   // console.log(request.body);
   const person = await PersonService.add(request.body);
-  response.send(person)
+  response.send(person);
 });
 
 app.delete(`/person/:id`, async (request, response) => {
   const id = request.params.id;
   await PersonService.del(id);
   response.send('ok');
-//   axios.delete
+  //   axios.delete
 });
 
 // axios.get
@@ -43,4 +42,3 @@ app.delete(`/person/:id`, async (request, response) => {
 app.listen(3000, () => {
   console.log('listening');
 });
-

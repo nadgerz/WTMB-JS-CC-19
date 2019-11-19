@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
 const Chalk = require('chalk');
-process.env["NODE_CONFIG_DIR"] = __dirname;
+process.env['NODE_CONFIG_DIR'] = __dirname;
 const config = require('config');
 
 const mongoURI = 'mongoURI';
 
 if (!config.has(mongoURI)) {
-  console.error(Chalk.bgRed.bold(`Please add a ${Chalk.inverse(mongoURI)} key to the default.json file.`));
+  console.error(
+    Chalk.bgRed.bold(
+      `Please add a ${Chalk.inverse(mongoURI)} key to the default.json file.`,
+    ),
+  );
   // Exit process with failure
   process.exit(1);
 }
 const dbUrl = config.get('mongoURI');
-
 
 const connectDB = async () => {
   try {

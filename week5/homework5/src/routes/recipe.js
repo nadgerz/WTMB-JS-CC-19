@@ -73,8 +73,6 @@ router.delete(`/:id`, async (req, res) => {
   // res.render('users', { users });
 });
 
-
-
 // ADD a new recipe for a specific user
 // axios.post('/user/6/recipe',{title: 'Wet Cat Food', version: {servingSize: 1, cookingTime: 1}})
 // router.post(`/:id/recipe`, async (req, res) => {
@@ -92,6 +90,5 @@ router.delete(`/:id`, async (req, res) => {
 //
 //   res.redirect(`/user/${id}`);
 // });
-
 
 module.exports = router;

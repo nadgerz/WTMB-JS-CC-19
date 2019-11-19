@@ -6,7 +6,6 @@ const meetupRouter = require('./routes/meetup');
 
 const app = express();
 
-
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 
