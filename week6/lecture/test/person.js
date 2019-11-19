@@ -1,79 +1,79 @@
-import test from 'ava'
-import request from 'supertest'
-import app from "../app"
+import test from 'ava';
+import request from 'supertest';
+import app from '../app';
 
 test('Create new person', async t => {
-  t.plan(3)
+  t.plan(3);
   const personToCreate = {
     name: 'Armagan Amcalar',
     age: 34,
-    meetups: []
-  }
+    meetups: [],
+  };
 
   const res = await request(app)
     .post('/person')
-    .send(personToCreate)
+    .send(personToCreate);
 
-  t.is(res.status, 200)
-  t.is(res.body.name, personToCreate.name)
-  t.is(res.body.age, personToCreate.age)
-})
+  t.is(res.status, 200);
+  t.is(res.body.name, personToCreate.name);
+  t.is(res.body.age, personToCreate.age);
+});
 
 test('Fetch a person', async t => {
-  t.plan(3)
+  t.plan(3);
   const personToCreate = {
     name: 'Maria Ovsyannikova',
     age: 25,
-    meetups: []
-  }
+    meetups: [],
+  };
 
   const mariaUserCreated = (await request(app)
     .post('/person')
-    .send(personToCreate)).body
+    .send(personToCreate)).body;
 
-  const fetchRes = await request(app).get(`/person/${mariaUserCreated._id}/json`)
+  const fetchRes = await request(app).get(`/person/${mariaUserCreated._id}/json`);
 
-  t.is(fetchRes.status, 200)
+  t.is(fetchRes.status, 200);
 
-  const fetchResJson = await request(app).get(`/person/${mariaUserCreated._id}/json`)
+  const fetchResJson = await request(app).get(`/person/${mariaUserCreated._id}/json`);
 
-  t.is(fetchResJson.status, 200)
-  const mariaUserFetched = fetchResJson.body
-  t.deepEqual(mariaUserFetched, mariaUserCreated)
-})
+  t.is(fetchResJson.status, 200);
+  const mariaUserFetched = fetchResJson.body;
+  t.deepEqual(mariaUserFetched, mariaUserCreated);
+});
 
 test('Delete a person', async t => {
-  t.plan(3)
+  t.plan(3);
 
-  const personToCreate = { name: 'Celia Gomez', age: 33, meetups: [] }
+  const personToCreate = { name: 'Celia Gomez', age: 33, meetups: [] };
 
   const celiaUserCreated = (await request(app)
     .post('/person')
-    .send(personToCreate)).body
+    .send(personToCreate)).body;
 
-  const deleteRes = await request(app).delete(`/person/${celiaUserCreated._id}`)
+  const deleteRes = await request(app).delete(`/person/${celiaUserCreated._id}`);
 
-  t.is(deleteRes.status, 200)
-  t.is(deleteRes.ok, true)
+  t.is(deleteRes.status, 200);
+  t.is(deleteRes.ok, true);
 
-  const fetch = await request(app).get(`/person/${celiaUserCreated._id}/json`)
+  const fetch = await request(app).get(`/person/${celiaUserCreated._id}/json`);
 
-  t.is(fetch.status, 404)
-})
+  t.is(fetch.status, 404);
+});
 
 test('Get list of people', async t => {
-  t.plan(4)
-  const personToCreate = { name: 'Omur Turan', age: 30, meetups: [] }
+  t.plan(4);
+  const personToCreate = { name: 'Omur Turan', age: 30, meetups: [] };
 
   const _ = await request(app)
     .post('/person')
-    .send(personToCreate)
+    .send(personToCreate);
 
-  const res = await request(app).get('/person/all')
-  t.is(res.status, 200)
+  const res = await request(app).get('/person/all');
+  t.is(res.status, 200);
 
-  const jsonRes = await request(app).get('/person/all/json')
-  t.is(jsonRes.status, 200)
-  t.true(Array.isArray(jsonRes.body), 'Body should be an array')
-  t.true(jsonRes.body.length > 0)
-})
+  const jsonRes = await request(app).get('/person/all/json');
+  t.is(jsonRes.status, 200);
+  t.true(Array.isArray(jsonRes.body), 'Body should be an array');
+  t.true(jsonRes.body.length > 0);
+});
