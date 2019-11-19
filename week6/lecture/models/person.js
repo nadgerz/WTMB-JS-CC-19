@@ -4,7 +4,7 @@ const PersonSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minLength: 2,
+    minlength: 2,
   },
   age: {
     type: Number,
@@ -22,11 +22,12 @@ const PersonSchema = new mongoose.Schema({
   ],
 });
 
-PersonSchema.methods.attend = async function(meetup) {
-  this.meetups.push(meetup);
-  meetup.attendees.push(this);
-  await PersonService.attendMeetup(person, meetup);
-  await meetup.save();
+PersonSchema.methods.findPeersOver18 = function(cb) {
+  return PersonModel.find({
+    age: {
+      $gte: 18,
+    },
+  });
 };
 
 PersonSchema.plugin(require('mongoose-autopopulate'));

@@ -8,7 +8,7 @@ class UserService extends BaseService {
     super(UserModel, `${__dirname}/../user-database.json`);
   }
 
-  async add({name, email, password}) {
+  async add({ name, email, password }) {
     if (!isEmail(email)) {
       return null;
     }

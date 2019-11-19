@@ -4,10 +4,11 @@
   "description": "## Women Techmakers Berlin JS Crash Course #4",
   "main": "week4/homework4/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava",
     "start": "node week4/homework4/src/index.js",
     "start-watch": "nodemon week4/homework4/src/index.js",
     "format": "pretty-quick --pattern \"**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
+    "format:full": "prettier --write \"./**/*.{js,jsx,css,htm,json,ts,html,sass,scss}\"",
     "lint": "eslint \"**/*.{js,jsx}\" --quiet"
   },
   "keywords": [],
@@ -27,6 +28,7 @@
     "validator": "^12.0.0"
   },
   "devDependencies": {
+    "ava": "^2.4.0",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
@@ -38,7 +40,8 @@
     "husky": "^3.0.9",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {

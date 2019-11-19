@@ -1,289 +1,383 @@
-[[
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6"
-],{
-  "name": "7",
-  "id": "8",
-  "email": "9",
-  "password": "10",
-  "recipes": "11"
-},{
-  "name": "12",
-  "id": "13",
-  "email": "14",
-  "password": "15",
-  "recipes": "16"
-},{
-  "name": "17",
-  "id": "18",
-  "email": "19",
-  "password": "20",
-  "recipes": "21"
-},{
-  "name": "22",
-  "id": "23",
-  "email": "24",
-  "password": "25",
-  "recipes": "26"
-},{
-  "name": "27",
-  "id": "28",
-  "email": "29",
-  "password": "25",
-  "recipes": "30"
-},{
-  "name": "31",
-  "id": "32",
-  "email": "33",
-  "password": "25",
-  "recipes": "34"
-},"Antonia","e8e165f0-ffda-11e9-b3e8-61d7fa5dd8db","Antonia@mail.com","1234",[
-  "35"
-],"Berta","e8e18d00-ffda-11e9-b3e8-61d7fa5dd8db","Berta@mail.com","qwerty",[
-  "36"
-],"Chris Christofferson","e8e18d01-ffda-11e9-b3e8-61d7fa5dd8db","Chris@mail.com","qwertz",[
-  "37",
-  "38"
-],"Doris","e5c62900-0197-11ea-9f3b-cd9f61882918","doris@mail.de","meowmeow",[],"Eris","ab405c00-0198-11ea-9890-137ccaee4ad1","eris@mail.com",[],"Nin","d89d84c0-0198-11ea-b0cd-c5a6a0fa7a9e","nin@ninnycat.de",[
-  "39",
-  "40",
-  "41"
-],{
-  "title": "42",
-  "id": "43",
-  "dateCreated": "44",
-  "versions": "45"
-},{
-  "title": "46",
-  "id": "47",
-  "dateCreated": "48",
-  "versions": "49"
-},{
-  "title": "50",
-  "id": "51",
-  "dateCreated": "52",
-  "versions": "53"
-},{
-  "title": "54",
-  "id": "55",
-  "dateCreated": "56",
-  "versions": "57"
-},{
-  "title": "58",
-  "id": "59",
-  "dateCreated": "60",
-  "versions": "61"
-},{
-  "title": "62",
-  "id": "63",
-  "dateCreated": "64",
-  "versions": "65"
-},{
-  "title": "66",
-  "id": "67",
-  "dateCreated": "68",
-  "versions": "69"
-},"eggs","c0dc1400-ffdb-11e9-815c-9929210c8c54","2019-11-05T14:51:31.008Z",[
-  "70",
-  "71",
-  "72"
-],"Miso Orange Salmon","9ec3a570-0168-11ea-9f0d-91ab7cfb8716","2019-11-07T14:12:24.007Z",[
-  "73"
-],"Garlicky Asparagus OR Green Beans","cc4bfce0-0168-11ea-87b6-e1e674599d4a","2019-11-07T14:13:40.398Z",[
-  "74"
-],"Honey Lemon Shrimp Recipe With Veggies","d84616c0-0168-11ea-b228-9fee995d0c44","2019-11-07T14:14:00.492Z",[
-  "75"
-],"dry Cat Food","50edd620-021e-11ea-969a-9dbc836c37fc","2019-11-08T11:53:01.826Z",[
-  "76"
-],"Cat Food","f112bc00-021f-11ea-a3cc-976b187b4900","2019-11-08T12:04:40.000Z",[
-  "77"
-],"Dry Cat Food","a483cc60-0258-11ea-bc65-bbf3e00f0019","2019-11-08T18:50:32.871Z",[
-  "78"
-],{
-  "id": 1,
-  "cookingTime": 7,
-  "servingSize": 0,
-  "instructions": "79",
-  "notes": "80",
-  "tags": "81",
-  "ingredients": "82"
-},{
-  "id": 2,
-  "cookingTime": 8.5,
-  "servingSize": 0,
-  "instructions": "83",
-  "notes": "84",
-  "tags": "85",
-  "ingredients": "86"
-},{
-  "id": 4,
-  "cookingTime": 10,
-  "servingSize": 0,
-  "instructions": "87",
-  "notes": "88",
-  "tags": "89",
-  "ingredients": "90"
-},{
-  "id": 1,
-  "cookingTime": 30,
-  "servingSize": 3,
-  "instructions": "91",
-  "notes": "92",
-  "tags": "93",
-  "ingredients": "94"
-},{
-  "id": 1,
-  "cookingTime": 15,
-  "servingSize": 3,
-  "instructions": "95",
-  "notes": "96",
-  "tags": "97",
-  "ingredients": "98"
-},{
-  "id": 1,
-  "cookingTime": 45,
-  "servingSize": 4,
-  "instructions": "99",
-  "notes": "100",
-  "tags": "101",
-  "ingredients": "102"
-},{
-  "id": 1,
-  "cookingTime": 0,
-  "servingSize": 1,
-  "instructions": "103",
-  "notes": "104",
-  "tags": "105",
-  "ingredients": "106"
-},{
-  "id": 1,
-  "cookingTime": 0,
-  "servingSize": 1,
-  "instructions": "107",
-  "notes": "108",
-  "tags": "109",
-  "ingredients": "110"
-},{
-  "id": 1,
-  "cookingTime": 0,
-  "servingSize": 1,
-  "instructions": "111",
-  "notes": "112",
-  "tags": "113",
-  "ingredients": "114"
-},[],[],[],[
-  "115"
-],[],[],[],[],[],[],[],[],[
-  "116"
-],[
-  "117"
-],{
-  "mealType": "118",
-  "dishType": "119",
-  "season": "120",
-  "worldRegion": "121",
-  "healthDiet": "122"
-},[
-  "123"
-],[
-  "124"
-],[
-  "125"
-],{
-  "mealType": "126",
-  "dishType": "127",
-  "season": "128",
-  "worldRegion": "129",
-  "healthDiet": "130"
-},[
-  "131",
-  "132"
-],[
-  "133"
-],[],{
-  "mealType": "134",
-  "dishType": "135",
-  "season": "136",
-  "worldRegion": "137",
-  "healthDiet": "138"
-},[
-  "139",
-  "140"
-],[],[],[],[
-  "141"
-],[],[],[],[],[],[],[],[],{
-  "id": "142",
-  "amount": 1,
-  "unit": "143",
-  "name": "144",
-  "sub": "145"
-},"Set oven to 420F.","Notes for next time",[
-  "146",
-  "147"
-],[
-  "148"
-],[
-  "143"
-],[
-  "143"
-],[
-  "149"
-],{
-  "id": "150",
-  "amount": 3,
-  "unit": "143",
-  "name": "151",
-  "sub": "152"
-},"Continue to cook until the asparagus turns a vibrant green color and the spears are crisp-tender.","try Beans on next try",[
-  "146",
-  "147"
-],[
-  "153"
-],[
-  "154"
-],[],[
-  "155",
-  "156",
-  "157"
-],{
-  "id": "158",
-  "amount": 0,
-  "unit": "143",
-  "name": "159",
-  "sub": "160"
-},{
-  "id": "161",
-  "amount": 1,
-  "unit": "162",
-  "name": "163",
-  "sub": "164"
-},"Build the meals by evenly dividing the ingredients by 4, or your number of servings.",[
-  "146",
-  "147"
-],[
-  "165"
-],[],[],[
-  "166"
-],{
-  "id": "167",
-  "amount": 0,
-  "unit": "143",
-  "name": "168",
-  "sub": "169"
-},{
-  "id": "170",
-  "amount": 1.5,
-  "unit": "171",
-  "name": "172",
-  "sub": "173"
-},{
-  "id": "174",
-  "amount": 1,
-  "unit": "175",
-  "name": "176",
-  "sub": "177"
-},"faab9e70-ffdc-11e9-b0cb-dbbd35228d8c","","egg",[],"Lunch","Dinner","Fish Recipes","fish","9ec3a571-0168-11ea-9f0d-91ab7cfb8716","salmon fillets",[],"Side Dish","Spring","vegetarian","vegan","gluten-free","cc4c23f0-0168-11ea-87b6-e1e674599d4a","olive oil spray",[],"cc4c23f1-0168-11ea-87b6-e1e674599d4a","bundle (15 spears)","asparagus",[],"Fish Recipe","Pescatarian","d84616c1-0168-11ea-b228-9fee995d0c44","Sauce",[],"d84616c2-0168-11ea-b228-9fee995d0c44","lb","raw shrimp",[],"50edd621-021e-11ea-969a-9dbc836c37fc","handful","kibble",[]]
+[
+  ["1", "2", "3", "4", "5", "6"],
+  {
+    "name": "7",
+    "id": "8",
+    "email": "9",
+    "password": "10",
+    "recipes": "11"
+  },
+  {
+    "name": "12",
+    "id": "13",
+    "email": "14",
+    "password": "15",
+    "recipes": "16"
+  },
+  {
+    "name": "17",
+    "id": "18",
+    "email": "19",
+    "password": "20",
+    "recipes": "21"
+  },
+  {
+    "name": "22",
+    "id": "23",
+    "email": "24",
+    "password": "25",
+    "recipes": "26"
+  },
+  {
+    "name": "27",
+    "id": "28",
+    "email": "29",
+    "password": "25",
+    "recipes": "30"
+  },
+  {
+    "name": "31",
+    "id": "32",
+    "email": "33",
+    "password": "25",
+    "recipes": "34"
+  },
+  "Antonia",
+  "e8e165f0-ffda-11e9-b3e8-61d7fa5dd8db",
+  "Antonia@mail.com",
+  "1234",
+  ["35"],
+  "Berta",
+  "e8e18d00-ffda-11e9-b3e8-61d7fa5dd8db",
+  "Berta@mail.com",
+  "qwerty",
+  ["36"],
+  "Chris Christofferson",
+  "e8e18d01-ffda-11e9-b3e8-61d7fa5dd8db",
+  "Chris@mail.com",
+  "qwertz",
+  ["37", "38"],
+  "Doris",
+  "e5c62900-0197-11ea-9f3b-cd9f61882918",
+  "doris@mail.de",
+  "meowmeow",
+  [],
+  "Eris",
+  "ab405c00-0198-11ea-9890-137ccaee4ad1",
+  "eris@mail.com",
+  [],
+  "Nin",
+  "d89d84c0-0198-11ea-b0cd-c5a6a0fa7a9e",
+  "nin@ninnycat.de",
+  ["39", "40", "41"],
+  {
+    "title": "42",
+    "id": "43",
+    "dateCreated": "44",
+    "versions": "45"
+  },
+  {
+    "title": "46",
+    "id": "47",
+    "dateCreated": "48",
+    "versions": "49"
+  },
+  {
+    "title": "50",
+    "id": "51",
+    "dateCreated": "52",
+    "versions": "53"
+  },
+  {
+    "title": "54",
+    "id": "55",
+    "dateCreated": "56",
+    "versions": "57"
+  },
+  {
+    "title": "58",
+    "id": "59",
+    "dateCreated": "60",
+    "versions": "61"
+  },
+  {
+    "title": "62",
+    "id": "63",
+    "dateCreated": "64",
+    "versions": "65"
+  },
+  {
+    "title": "66",
+    "id": "67",
+    "dateCreated": "68",
+    "versions": "69"
+  },
+  "eggs",
+  "c0dc1400-ffdb-11e9-815c-9929210c8c54",
+  "2019-11-05T14:51:31.008Z",
+  ["70", "71", "72"],
+  "Miso Orange Salmon",
+  "9ec3a570-0168-11ea-9f0d-91ab7cfb8716",
+  "2019-11-07T14:12:24.007Z",
+  ["73"],
+  "Garlicky Asparagus OR Green Beans",
+  "cc4bfce0-0168-11ea-87b6-e1e674599d4a",
+  "2019-11-07T14:13:40.398Z",
+  ["74"],
+  "Honey Lemon Shrimp Recipe With Veggies",
+  "d84616c0-0168-11ea-b228-9fee995d0c44",
+  "2019-11-07T14:14:00.492Z",
+  ["75"],
+  "dry Cat Food",
+  "50edd620-021e-11ea-969a-9dbc836c37fc",
+  "2019-11-08T11:53:01.826Z",
+  ["76"],
+  "Cat Food",
+  "f112bc00-021f-11ea-a3cc-976b187b4900",
+  "2019-11-08T12:04:40.000Z",
+  ["77"],
+  "Dry Cat Food",
+  "a483cc60-0258-11ea-bc65-bbf3e00f0019",
+  "2019-11-08T18:50:32.871Z",
+  ["78"],
+  {
+    "id": 1,
+    "cookingTime": 7,
+    "servingSize": 0,
+    "instructions": "79",
+    "notes": "80",
+    "tags": "81",
+    "ingredients": "82"
+  },
+  {
+    "id": 2,
+    "cookingTime": 8.5,
+    "servingSize": 0,
+    "instructions": "83",
+    "notes": "84",
+    "tags": "85",
+    "ingredients": "86"
+  },
+  {
+    "id": 4,
+    "cookingTime": 10,
+    "servingSize": 0,
+    "instructions": "87",
+    "notes": "88",
+    "tags": "89",
+    "ingredients": "90"
+  },
+  {
+    "id": 1,
+    "cookingTime": 30,
+    "servingSize": 3,
+    "instructions": "91",
+    "notes": "92",
+    "tags": "93",
+    "ingredients": "94"
+  },
+  {
+    "id": 1,
+    "cookingTime": 15,
+    "servingSize": 3,
+    "instructions": "95",
+    "notes": "96",
+    "tags": "97",
+    "ingredients": "98"
+  },
+  {
+    "id": 1,
+    "cookingTime": 45,
+    "servingSize": 4,
+    "instructions": "99",
+    "notes": "100",
+    "tags": "101",
+    "ingredients": "102"
+  },
+  {
+    "id": 1,
+    "cookingTime": 0,
+    "servingSize": 1,
+    "instructions": "103",
+    "notes": "104",
+    "tags": "105",
+    "ingredients": "106"
+  },
+  {
+    "id": 1,
+    "cookingTime": 0,
+    "servingSize": 1,
+    "instructions": "107",
+    "notes": "108",
+    "tags": "109",
+    "ingredients": "110"
+  },
+  {
+    "id": 1,
+    "cookingTime": 0,
+    "servingSize": 1,
+    "instructions": "111",
+    "notes": "112",
+    "tags": "113",
+    "ingredients": "114"
+  },
+  [],
+  [],
+  [],
+  ["115"],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  ["116"],
+  ["117"],
+  {
+    "mealType": "118",
+    "dishType": "119",
+    "season": "120",
+    "worldRegion": "121",
+    "healthDiet": "122"
+  },
+  ["123"],
+  ["124"],
+  ["125"],
+  {
+    "mealType": "126",
+    "dishType": "127",
+    "season": "128",
+    "worldRegion": "129",
+    "healthDiet": "130"
+  },
+  ["131", "132"],
+  ["133"],
+  [],
+  {
+    "mealType": "134",
+    "dishType": "135",
+    "season": "136",
+    "worldRegion": "137",
+    "healthDiet": "138"
+  },
+  ["139", "140"],
+  [],
+  [],
+  [],
+  ["141"],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  {
+    "id": "142",
+    "amount": 1,
+    "unit": "143",
+    "name": "144",
+    "sub": "145"
+  },
+  "Set oven to 420F.",
+  "Notes for next time",
+  ["146", "147"],
+  ["148"],
+  ["143"],
+  ["143"],
+  ["149"],
+  {
+    "id": "150",
+    "amount": 3,
+    "unit": "143",
+    "name": "151",
+    "sub": "152"
+  },
+  "Continue to cook until the asparagus turns a vibrant green color and the spears are crisp-tender.",
+  "try Beans on next try",
+  ["146", "147"],
+  ["153"],
+  ["154"],
+  [],
+  ["155", "156", "157"],
+  {
+    "id": "158",
+    "amount": 0,
+    "unit": "143",
+    "name": "159",
+    "sub": "160"
+  },
+  {
+    "id": "161",
+    "amount": 1,
+    "unit": "162",
+    "name": "163",
+    "sub": "164"
+  },
+  "Build the meals by evenly dividing the ingredients by 4, or your number of servings.",
+  ["146", "147"],
+  ["165"],
+  [],
+  [],
+  ["166"],
+  {
+    "id": "167",
+    "amount": 0,
+    "unit": "143",
+    "name": "168",
+    "sub": "169"
+  },
+  {
+    "id": "170",
+    "amount": 1.5,
+    "unit": "171",
+    "name": "172",
+    "sub": "173"
+  },
+  {
+    "id": "174",
+    "amount": 1,
+    "unit": "175",
+    "name": "176",
+    "sub": "177"
+  },
+  "faab9e70-ffdc-11e9-b0cb-dbbd35228d8c",
+  "",
+  "egg",
+  [],
+  "Lunch",
+  "Dinner",
+  "Fish Recipes",
+  "fish",
+  "9ec3a571-0168-11ea-9f0d-91ab7cfb8716",
+  "salmon fillets",
+  [],
+  "Side Dish",
+  "Spring",
+  "vegetarian",
+  "vegan",
+  "gluten-free",
+  "cc4c23f0-0168-11ea-87b6-e1e674599d4a",
+  "olive oil spray",
+  [],
+  "cc4c23f1-0168-11ea-87b6-e1e674599d4a",
+  "bundle (15 spears)",
+  "asparagus",
+  [],
+  "Fish Recipe",
+  "Pescatarian",
+  "d84616c1-0168-11ea-b228-9fee995d0c44",
+  "Sauce",
+  [],
+  "d84616c2-0168-11ea-b228-9fee995d0c44",
+  "lb",
+  "raw shrimp",
+  [],
+  "50edd621-021e-11ea-969a-9dbc836c37fc",
+  "handful",
+  "kibble",
+  []
+]

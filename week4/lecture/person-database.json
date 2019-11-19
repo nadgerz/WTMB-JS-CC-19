@@ -2,9 +2,7 @@
   {
     "name": "Armagan",
     "age": 34,
-    "meetups": [
-      "Women Tech Makers Berlin"
-    ],
+    "meetups": ["Women Tech Makers Berlin"],
     "id": 2
   },
   {

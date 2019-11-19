@@ -1,9 +1,10 @@
 const axios = require('axios');
 const connectDB = require('../../config/db');
-connectDB();
 const server = 'http://localhost:3000';
 
 async function test() {
+  await connectDB();
+
   let result;
 
   //
@@ -11,15 +12,37 @@ async function test() {
   // let user = await axios.get(`${server}/user/${id}`);
   // console.log(user);
 
-  // result = await
-  let users = await axios.get(`${server}/user/all`);
-  console.log(users.data);
+  // try {
+  //   let url = `${server}/user/all`;
+  //   console.log(url);
+  //   let users = await axios.get(url);
+  //   console.log('got user data');
+  //   // console.log(users.data);
+  // } catch (err) {
+  //   console.log('catch() in test()');
+  //   // console.log(err);
+  //   // console.log(err.response.statusText);
+  //   console.log(err.message);
+  // }
+
+  // GET a user by name (query string)
+  try {
+    result = await axios.get(`${server}/user`, {
+      params: {
+        name: 'Antonia',
+      },
+    });
+
+    process.exit(0);
+  } catch (err) {
+    console.log(err.response.data.message);
+  }
 
   // POST a user
   // try {
   //   result = await axios.post(`${server}/user`, {
   //     name: 'Steve',
-  //     email: 'Stevo@mail',
+  //     // email: 'Stevo@mail',
   //     password: 'nadgerz'
   //   });
   //
@@ -27,7 +50,9 @@ async function test() {
   //
   //   process.exit(0);
   // } catch (err) {
-  //   console.log(err.message);
+  //   console.log('test.js POST');
+  //   console.log(err.response.data.message);
+  //   // console.log(err.message);
   // }
 
   // DELETE a user
@@ -49,20 +74,25 @@ async function test() {
   // }
 
   //  TEST recipe GET + POST
-  //   try {
-  //     result = await axios.post(`${server}/recipe/test`);
-  //     console.log(result.data);
+  // try {
+  //   result = await axios.post(`${server}/user/test`);
+  //   console.log('POST result data');
+  //   console.log(result.data);
   //
-  //     process.exit(0);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
+  //   process.exit(0);
+  // } catch (err) {
+  //   console.log('POST ERR');
+  //   console.log(err.response.data.message);
+  // }
+  //
   //   try {
-  //     result = await axios.get(`${server}/recipe/test`);
+  //     result = await axios.get(`${server}/user/test`);
+  //     console.log('GET result data');
   //     console.log(result.data);
   //     process.exit(0);
   //   } catch (err) {
-  //     console.log(err.message);
+  //     console.log('GET ERR');
+  //     console.log(err.response.data.message);
   //   }
 
   //  GET a recipe

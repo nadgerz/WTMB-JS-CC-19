@@ -1,16 +1,8 @@
 const mongoose = require('mongoose');
 
 const MeetupSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minLength: 2,
-  },
-  location: {
-    type: String,
-    required: true,
-    minLength: 2,
-  },
+  name: String,
+  location: String,
   attendees: [
     {
       type: mongoose.SchemaTypes.ObjectId,
@@ -21,12 +13,6 @@ const MeetupSchema = new mongoose.Schema({
     },
   ],
 });
-
-//
-// MeetupSchema.methods.attend = async function(meetup) {
-//     this.meetups.push(meetup);
-//     await this.save();
-// };
 
 MeetupSchema.plugin(require('mongoose-autopopulate'));
 
