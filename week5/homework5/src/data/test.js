@@ -29,16 +29,13 @@ async function test() {
   try {
     result = await axios.get(`${server}/user`, {
       params: {
-        name: 'Antonia'
-      }});
-
-    console.log(result);
+        name: 'Antonia',
+      },
+    });
 
     process.exit(0);
   } catch (err) {
-    console.log('test.js POST');
     console.log(err.response.data.message);
-    // console.log(err.message);
   }
 
   // POST a user
