@@ -71,11 +71,16 @@ fabric.properties
 
 #
 .DS_Store
+logs/
+**/*.log
 /node_modules/
 .cache/
+.idea/
+.vscode/
 dist/
 .env
 coverage/
-.vscode/
-.idea/
-week5/homework5/config/default.json
+.nyc_output/
+
+# my own setup
+**/*/config/default.json

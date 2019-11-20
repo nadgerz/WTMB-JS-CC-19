@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    div.recipe
+        p #{user.name}
+        h2 #{recipe.title}
+        hr
+        ol.versions
+            each version in recipe.versions
+                li Version
+                    ul.version
+                        li cooking Time: #{version.cookingTime}
+                        li serving Size: #{version.servingSize}
+                        li INGREDIENTS
+                            ul.ingredients
+                                 each ingredient in version.ingredients
+                                     li #{ingredient.amount} #{ingredient.unit} #{ingredient.name}
+                        li INSTRUCTIONS
+                            ul.instructions
+                                each instruction in version.instructions
+                                    li #{instruction || '...'}
+
+                hr

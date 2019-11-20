@@ -3,7 +3,10 @@ import request from 'supertest';
 import app from '../app';
 
 test('Create new person', async t => {
+
+  // this 'plans' for 3 assertions (at the bottom: 't.is')
   t.plan(3);
+
   const personToCreate = {
     name: 'Armagan Amcalar',
     age: 34,
@@ -45,6 +48,7 @@ test('Fetch a person', async t => {
 
   t.is(fetchResJson.status, 200);
   const mariaUserFetched = fetchResJson.body;
+  // this is the way to compare objects
   t.deepEqual(mariaUserFetched, mariaUserCreated);
 });
 
@@ -80,10 +84,40 @@ test('Get list of people', async t => {
     .send(personToCreate);
 
   const res = await request(app).get('/person/all');
+  console.log('res', res.status);
   t.is(res.status, 200);
 
   const jsonRes = await request(app).get('/person/all/json');
   t.is(jsonRes.status, 200);
   t.true(Array.isArray(jsonRes.body), 'Body should be an array');
   t.true(jsonRes.body.length > 0);
+});
+
+test('User can attend a Meetup', async t => {
+  const anna = { name: 'Anna Pavlova', age: 25, meetups: [] };
+  const meetup = { name: 'JSCC 2019', location: 'Wayfair', attendees: [] };
+
+  const annaUser = (
+    await request(app)
+      .post('/person')
+      .send(anna)
+  ).body;
+
+  const createdMeetup = (
+    await request(app)
+      .post(`/meetup`)
+      .send(meetup)
+  ).body;
+
+  const attendedMeetupRes = (
+    await request(app)
+      .post(`/${annaUser._id}/meetups`)
+      .send({ meetup: createdMeetup._id })
+  );
+
+  t.is(attendedMeetupRes.status, 200);
+
+  const alteredAnna = attendedMeetupRes.body;
+
+  t.is(alteredAnna.meetups[0]._id, createdMeetup._id);
 });
