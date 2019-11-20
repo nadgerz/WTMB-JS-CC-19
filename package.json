@@ -49,5 +49,12 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged && npm run lint"
     }
+  },
+  "ava": {
+    "files": [
+      "test/**/*",
+      "!test/week5",
+      "!test/week6/lecture"
+    ]
   }
 }
