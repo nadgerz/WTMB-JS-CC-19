@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    div.user
+        h2 #{user.name}
+        hr
+        h3 #{user.recipes.length} Recipe#{user.recipes.length === 1 ? '' : 's'}:
+        ul.recipes
+            each recipe in user.recipes
+                li
+                    strong
+                        -var userId = (users.findIndex(u => u.id === user.id) + 1)
+                        -var recipeId = (user.recipes.findIndex(r => r.id === recipe.id) + 1)
+                        a(href=`/user/${userId}/recipe/${recipeId}`) #{recipe.title}
+                    span  // #{recipe.versions.length} Version#{recipe.versions.length === 1 ? '' : 's'}

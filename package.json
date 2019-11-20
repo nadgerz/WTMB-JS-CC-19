@@ -4,7 +4,8 @@
   "description": "## Women Techmakers Berlin JS Crash Course #4",
   "main": "week4/homework4/src/index.js",
   "scripts": {
-    "test": "ava",
+    "test": "ava --watch --verbose",
+    "test-coverage": "nyc ava --verbose",
     "start": "node week4/homework4/src/index.js",
     "start-watch": "nodemon week4/homework4/src/index.js",
     "format": "pretty-quick --pattern \"**/*.*(js|jsx|scss|sass|css|json|ts|html)\"",
@@ -41,7 +42,8 @@
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "nyc": "^14.1.1"
   },
   "husky": {
     "hooks": {
