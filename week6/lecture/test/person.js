@@ -1,9 +1,10 @@
+/* eslint-disable */
+
 import test from 'ava';
 import request from 'supertest';
 import app from '../app';
 
 test('Create new person', async t => {
-
   // this 'plans' for 3 assertions (at the bottom: 't.is')
   t.plan(3);
 
@@ -109,11 +110,9 @@ test('User can attend a Meetup', async t => {
       .send(meetup)
   ).body;
 
-  const attendedMeetupRes = (
-    await request(app)
-      .post(`/${annaUser._id}/meetups`)
-      .send({ meetup: createdMeetup._id })
-  );
+  const attendedMeetupRes = await request(app)
+    .post(`/${annaUser._id}/meetups`)
+    .send({ meetup: createdMeetup._id });
 
   t.is(attendedMeetupRes.status, 200);
 

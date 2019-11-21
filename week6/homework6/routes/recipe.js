@@ -3,10 +3,11 @@ const router = express.Router();
 const HttpStatus = require('http-status-codes');
 // const RecipeService = require('../services/recipe-service');
 
-
 router.get('/test', (req, res) => res.send('Test route for recipe [GET]'));
 
-router.post('/test', (req, res) => res.status(HttpStatus.OK).send('Test route for recipe [POST]'));
+router.post('/test', (req, res) =>
+  res.status(HttpStatus.OK).send('Test route for recipe [POST]'),
+);
 
 //
 // router.get('/all', async (req, res) => {
@@ -49,6 +50,5 @@ router.post('/test', (req, res) => res.status(HttpStatus.OK).send('Test route fo
 //
 //   res.send('ok');
 // });
-
 
 module.exports = router;

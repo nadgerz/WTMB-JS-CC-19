@@ -1,4 +1,7 @@
+/* eslint-disable */
+
 // import validator from 'validator';
+
 // const isEmail = require('validator/lib/isEmail');
 const BaseService = require('./base-service');
 const UserModel = require('../models/user');

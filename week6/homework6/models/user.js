@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'A user name is required'],
     // defining an error message
     minLength: [2, 'Name must be longer than 1 letter'],
-    maxLength: [30, 'A name can only have a maximum of 30 characters']
+    maxLength: [30, 'A name can only have a maximum of 30 characters'],
   },
   email: {
     type: String,
@@ -25,11 +25,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A password is required'],
     minLength: [6, 'the minimum length is 6 characters'],
-    maxLength: [60, 'the maximum characters allowed is 30']
+    maxLength: [60, 'the maximum characters allowed is 30'],
   },
-  recipes: [{
-    type: mongoose.SchemaTypes.ObjectId,
-  }],
+  recipes: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+    },
+  ],
 });
 
 // UserSchema.plugin(require('mongoose-autopopulate'));

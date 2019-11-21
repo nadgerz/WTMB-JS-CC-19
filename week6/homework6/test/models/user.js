@@ -1,24 +1,57 @@
-const assert = require('assert');
+/* eslint-disable */
+
+// const assert = require('assert');
 import test from 'ava';
-import request from 'supertest';
 import UserModel from '../../models/user';
 
+test('Create new user with UserModel', t => {
+  t.plan(4);
 
+  const validUser = {
+    name: 'steve',
+    email: 'steve@mail.com',
+    password: '123567',
+  };
 
+  const createdUser = new UserModel(validUser);
 
-const steve = new UserModel({
-  name: 'steve',
-  email: 'stave@mail.com',
-  password: '1235677',
+  // TODO: improve below
+  t.is(createdUser.recipes.length === 0, validUser.recipes.length === 0);
+  t.is(createdUser.name, validUser.name);
+  t.is(createdUser.email, validUser.email);
+  t.is(createdUser.password, validUser.password);
 });
 
-let error = steve.validateSync();
+test('fail at creating a new user with UserModel', t => {
+  t.plan(3);
 
-console.log(error.errors['email']);
-assert.equal(error.errors['email'].message,
-  `${steve.email} is not a valid email address!`);
+  const badUser = {
+    name: 's',
+    email: 's@',
+    password: '12356',
+  };
 
+  // const createdUser = new UserModel(badUser);
+  // TODO: check that createdUser is undefined
 
+  // validateSync();
+  // Returns:
+  // «ValidationError,undefined» ValidationError if there are errors during validation, or undefined if there is no error.
+  // This method is useful if you need synchronous validation.
+
+  // let error = validUser.validateSync();
+
+  // console.log(error.errors['email']);
+  // assert.equal(error.errors['email'].message,
+  //   `${validUser.email} is not a valid email address!`);
+
+  console.log('recipes');
+  console.log(createdUser.recipes);
+
+  t.is(createdUser.name, validUser.name);
+  t.is(createdUser.email, validUser.email);
+  t.is(createdUser.password, validUser.password);
+});
 
 // drink: {
 //   type: String,
@@ -27,4 +60,3 @@ assert.equal(error.errors['email'].message,
 //     return this.bacon > 3;
 //   }
 // }
-

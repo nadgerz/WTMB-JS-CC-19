@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const BaseService = require('./base-service');
 const RecipeModel = require('../models/recipe');
 
