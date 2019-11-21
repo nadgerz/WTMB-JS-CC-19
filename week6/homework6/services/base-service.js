@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 module.exports = class Service {
   constructor(model) {
     this.model = model;

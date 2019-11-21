@@ -4,6 +4,7 @@ const BaseService = require('./base-service');
 const UserModel = require('../models/user');
 
 class UserService extends BaseService {
+  /* eslint-disable-next-line */
   model = UserModel;
 
   async add(user) {

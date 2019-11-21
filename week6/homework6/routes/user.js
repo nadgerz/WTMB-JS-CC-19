@@ -3,10 +3,11 @@ const router = express.Router();
 const HttpStatus = require('http-status-codes');
 // const UserService = require('../services/user-service');
 
-
 router.get('/test', (req, res) => res.send('Test route for users [GET]'));
 
-router.post('/test', (req, res) => res.status(HttpStatus.OK).send('Test route for users [POST]'));
+router.post('/test', (req, res) =>
+  res.status(HttpStatus.OK).send('Test route for users [POST]'),
+);
 
 //
 // router.get('/all', async (req, res) => {
@@ -79,8 +80,5 @@ router.post('/test', (req, res) => res.status(HttpStatus.OK).send('Test route fo
 //     res.send(err.response.data.message);
 //   }
 // });
-
-
-
 
 module.exports = router;

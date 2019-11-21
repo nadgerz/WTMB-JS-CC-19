@@ -1,3 +1,4 @@
+/* eslint-disable */
 const axios = require('axios');
 const connectDB = require('../../config/db');
 const server = 'http://localhost:3000';

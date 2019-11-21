@@ -1,7 +1,8 @@
+/* eslint-disable */
+
 import test from 'ava';
 import request from 'supertest';
 import app from '../../app';
-
 
 // t is the 'execution context' / execution object
 // test('Create new person', async t => {
@@ -22,20 +23,57 @@ import app from '../../app';
 // Assertion plans ensure tests only pass when a specific number of assertions have been executed.
 // t.plan(3);
 
-test('Create new user', async t => {
-  t.plan(3);
+// Promise support
+// test('resolves with unicorn', t => {
+//   return somePromise().then(result => {
+//     t.is(result, 'unicorn');
+//   });
+// });
 
-  const userToCreate = {
-    name: 'Armagan Amcalar',
-    age: 34,
-    meetups: [],
-  };
+// Running specific tests
+// During development it can be helpful to only run a few specific tests. This can be accomplished using the .only modifier:
+// test.only('will be run', t => {
+// 	t.pass();
+// });
 
-  const res = await request(app)
-    .post('/person')
-    .send(userToCreate);
+// Test placeholders ("todo")
+//test.todo('will think about writing this later');
 
-  t.is(res.status, 200);
-  t.is(res.body.name, userToCreate.name);
-  t.is(res.body.age, userToCreate.age);
-});
+// Failing tests
+// // See: github.com/user/repo/issues/1234
+// test.failing('demonstrate some bug', t => {
+// 	t.fail(); // Test will count as passed
+// });
+
+// Skipping tests
+// test.skip('will not be run', t => {
+// 	t.fail();
+// });
+
+// Test context
+// Hooks can share context with the test:
+// test.beforeEach(t => {
+// 	t.context.data = generateUniqueData().;
+// });
+//
+// test('context data is foo', t => {
+// 	t.is(t.context.data + 'bar', 'foobar');
+// });
+
+// test('Create new user', async t => {
+//   t.plan(3);
+//
+//   const userToCreate = {
+//     name: 'Armagan Amcalar',
+//     age: 34,
+//     meetups: [],
+//   };
+//
+//   const res = await request(app)
+//     .post('/person')
+//     .send(userToCreate);
+//
+//   t.is(res.status, 200);
+//   t.is(res.body.name, userToCreate.name);
+//   t.is(res.body.age, userToCreate.age);
+// });
