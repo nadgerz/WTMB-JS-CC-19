@@ -12,7 +12,6 @@ const mongod = new MongoMemoryServer();
 test.before(async () => {
   const uri = await mongod.getConnectionString();
   await mongoose.connect(uri, {
-    // useMongoClient: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -21,12 +20,12 @@ test.before(async () => {
 
 // populating  database with dummy data
 test.beforeEach(async t => {
-  const user = new UserModel({
-    name: 'steve',
-    email: 'steve@mail.com',
-    password: '123567',
-  });
-  await user.save();
+  // const user = new UserModel({
+  //   name: 'steve',
+  //   email: 'steve@mail.com',
+  //   password: '123567',
+  // });
+  // await user.save();
 
   t.context = {
     app,
@@ -41,15 +40,30 @@ test.beforeEach(async t => {
 //   };
 // });
 
-test.serial('litmus get user', async t => {
-  const { app, userRoute } = t.context;
-  const res = await request(app).get(`${userRoute}/litmus`);
-
-  console.log(res.text);
+const checkLitmusResponse = (t, res) => {
   t.is(res.status, 200);
+  t.is(res.text, `Test route for ${res.req.path} [${res.req.method}]`);
+};
 
-  // t.is(res.body.name, 'One');
+test('litmus tests for GET/POST/DELETE/PUT', async t => {
+  t.plan(8);
+  const { app, userRoute } = t.context;
+  const litmusRoute = `${userRoute}/litmus`;
+  let res;
+
+  res = await request(app).get(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).post(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).delete(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).put(litmusRoute);
+  checkLitmusResponse(t, res);
 });
+
 //
 // test.serial('litmus create user', async t => {
 //   const { app } = t.context;

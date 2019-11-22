@@ -4,19 +4,19 @@ const router = express.Router();
 // const litmusRouter = require('./litmus');
 
 router.get('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [GET]\n`);
+  res.send(`Test route for ${req.originalUrl} [GET]`);
 });
 
 router.post('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [POST]\n`);
+  res.send(`Test route for ${req.originalUrl} [POST]`);
 });
 
 router.delete('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [DELETE]\n`);
+  res.send(`Test route for ${req.originalUrl} [DELETE]`);
 });
 
 router.put('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [PUT]\n`);
+  res.send(`Test route for ${req.originalUrl} [PUT]`);
 });
 
 //
