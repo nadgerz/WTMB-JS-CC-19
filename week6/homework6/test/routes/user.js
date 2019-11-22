@@ -12,9 +12,10 @@ const mongod = new MongoMemoryServer();
 test.before(async () => {
   const uri = await mongod.getConnectionString();
   await mongoose.connect(uri, {
-    useMongoClient: true,
+    // useMongoClient: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   });
 });
 
