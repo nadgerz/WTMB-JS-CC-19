@@ -8,18 +8,7 @@ module.exports = class Service {
   }
 
   findAll() {
-    // return axios.get("http://moppetx.com")
-    // return this.model.find();
-    // return Promise.reject(new Error('fail')).catch(console.error);
-
-    const data = { name: 'nin', status: 'wonky' };
-    console.log('base service');
-    console.log(data);
-
-    const promise = Promise.reject('bad apple');
-    console.log(promise);
-
-    return promise;
+    return this.model.find();
   }
 
   /*

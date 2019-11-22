@@ -1,64 +1,104 @@
-/* eslint-disable */
-
 import test from 'ava';
 import request from 'supertest';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+
 import app from '../../app';
+import UserModel from '../../models/user';
 
-// t is the 'execution context' / execution object
-// test('Create new person', async t => {
-// Each test or hook receives a different object. It contains the assertions as
-// well as the methods and properties listed below.
+// Start MongoDB instance
+const mongod = new MongoMemoryServer();
 
-// t.title / The test title.
-// t.context / Contains shared state from hooks.
-// t.plan(count) Plan how many assertion there are in the test.
+test.before(async () => {
+  const uri = await mongod.getConnectionString();
+  const debug = false;
 
-// Assertions
-// Assertions are mixed into the execution object provided to each test implementation
-// t.truthy('unicorn')
-// t.is()
-// t.deepEqual()
+  await mongoose
+    .connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    })
+    .then(() => {
+      if (debug) {
+        console.log('Fake Mongo connected');
+      }
+    })
+    .catch(err => console.error(err.message));
 
-// Assertion planning
-// Assertion plans ensure tests only pass when a specific number of assertions have been executed.
-// t.plan(3);
+  const user = new UserModel({
+    name: 'STEVE',
+    email: 'steve@mail.com',
+    password: '123567',
+  });
+  await user.save();
+});
 
-// Promise support
-// test('resolves with unicorn', t => {
-//   return somePromise().then(result => {
-//     t.is(result, 'unicorn');
-//   });
-// });
+// populating  database with dummy data
+test.beforeEach(async t => {
+  t.context = {
+    app,
+    userRoute: '/user',
+    //  TODO: add extra goodUser, badUser objects
+  };
+});
 
-// Running specific tests
-// During development it can be helpful to only run a few specific tests. This can be accomplished using the .only modifier:
-// test.only('will be run', t => {
-// 	t.pass();
-// });
+const checkLitmusResponse = (t, res) => {
+  t.is(res.status, 200);
+  t.is(res.text, `Test route for ${res.req.path} [${res.req.method}]`);
+};
 
-// Test placeholders ("todo")
-//test.todo('will think about writing this later');
+test('litmus tests for GET/POST/DELETE/PUT', async t => {
+  t.plan(8);
+  const { app, userRoute } = t.context;
+  const litmusRoute = `${userRoute}/litmus`;
+  let res;
 
-// Failing tests
-// // See: github.com/user/repo/issues/1234
-// test.failing('demonstrate some bug', t => {
-// 	t.fail(); // Test will count as passed
-// });
+  res = await request(app).get(litmusRoute);
+  checkLitmusResponse(t, res);
 
-// Skipping tests
-// test.skip('will not be run', t => {
-// 	t.fail();
-// });
+  res = await request(app).post(litmusRoute);
+  checkLitmusResponse(t, res);
 
-// Test context
-// Hooks can share context with the test:
-// test.beforeEach(t => {
-// 	t.context.data = generateUniqueData().;
-// });
+  res = await request(app).delete(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).put(litmusRoute);
+  checkLitmusResponse(t, res);
+});
+
+test.serial('get all users', async t => {
+  const { app, userRoute } = t.context;
+  const res = await request(app).get(`${userRoute}/all`);
+
+  t.is(res.status, 200);
+  t.true(Array.isArray(res.body));
+
+  // // Verify that user is created in DB
+  // const newUser = await User.findOne({ email: 'new@example.com' });
+  // t.is(newUser.name, 'New name');
+});
+
 //
-// test('context data is foo', t => {
-// 	t.is(t.context.data + 'bar', 'foobar');
+// test.serial('litmus create user', async t => {
+//   const { app } = t.context;
+//   const res = await request(app)
+//     .post('/litmus')
+//     .send({
+//       email: 'new@example.com',
+//       name: 'New name',
+//     });
+//
+//   t.is(res.status, 200);
+//   t.is(res.body.name, 'New name');
+//
+//   // Verify that user is created in DB
+//   const newUser = await User.findOne({ email: 'new@example.com' });
+//   t.is(newUser.name, 'New name');
 // });
+
+// TODO: test error messages
+// let error = badUser.validateSync();
 
 // test('Create new user', async t => {
 //   t.plan(3);
@@ -77,3 +117,8 @@ import app from '../../app';
 //   t.is(res.body.name, userToCreate.name);
 //   t.is(res.body.age, userToCreate.age);
 // });
+
+// TODO SAi: should this be at the bottom of the page?
+// clearing Dummy data
+test.afterEach.always(() => UserModel.deleteMany());
+// .remove is being deprecated
