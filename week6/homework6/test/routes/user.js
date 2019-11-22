@@ -11,6 +11,7 @@ const mongod = new MongoMemoryServer();
 
 test.before(async () => {
   const uri = await mongod.getConnectionString();
+  const debug = false;
 
   await mongoose
     .connect(uri, {
@@ -18,31 +19,29 @@ test.before(async () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     })
-    .then(() => console.log('Fake Mongo connected'))
+    .then(() => {
+      if (debug) {
+        console.log('Fake Mongo connected');
+      }
+    })
     .catch(err => console.error(err.message));
+
+  const user = new UserModel({
+    name: 'STEVE',
+    email: 'steve@mail.com',
+    password: '123567',
+  });
+  await user.save();
 });
 
 // populating  database with dummy data
 test.beforeEach(async t => {
-  // const user = new UserModel({
-  //   name: 'steve',
-  //   email: 'steve@mail.com',
-  //   password: '123567',
-  // });
-  // await user.save();
-
   t.context = {
     app,
     userRoute: '/user',
     //  TODO: add extra goodUser, badUser objects
   };
 });
-
-// test.beforeEach(t => {
-//   t.context = {
-//     app,
-//   };
-// });
 
 const checkLitmusResponse = (t, res) => {
   t.is(res.status, 200);
@@ -66,6 +65,18 @@ test('litmus tests for GET/POST/DELETE/PUT', async t => {
 
   res = await request(app).put(litmusRoute);
   checkLitmusResponse(t, res);
+});
+
+test.serial('get all users', async t => {
+  const { app, userRoute } = t.context;
+  const res = await request(app).get(`${userRoute}/all`);
+
+  t.is(res.status, 200);
+  t.true(Array.isArray(res.body));
+
+  // // Verify that user is created in DB
+  // const newUser = await User.findOne({ email: 'new@example.com' });
+  // t.is(newUser.name, 'New name');
 });
 
 //

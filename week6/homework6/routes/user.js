@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const UserService = require('../services/user-service');
 
 // const litmusRouter = require('./litmus');
 
@@ -11,17 +12,16 @@ router.post('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
 router.delete('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
 router.put('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
 
-//
-// router.get('/all', async (req, res) => {
-//   try {
-//     const users = await UserService.findAll();
-//     // console.log('USERS', users);
-//     res.send(users);
-//   } catch (err) {
-//     res.send(err.response.data.message);
-//     // res.status(418).send('Database down');
-//   }
-// });
+router.get('/all', async (req, res) => {
+  // res.send([]);
+  try {
+    const users = await UserService.findAll();
+    // console.log('USERS', users);
+    res.send(users);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
 //
 //
 // router.get('/', async (req, res) => {
