@@ -1,64 +1,73 @@
-/* eslint-disable */
-
 import test from 'ava';
 import request from 'supertest';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+
 import app from '../../app';
+import UserModel from '../../models/user';
 
-// t is the 'execution context' / execution object
-// test('Create new person', async t => {
-// Each test or hook receives a different object. It contains the assertions as
-// well as the methods and properties listed below.
+// Start MongoDB instance
+const mongod = new MongoMemoryServer();
 
-// t.title / The test title.
-// t.context / Contains shared state from hooks.
-// t.plan(count) Plan how many assertion there are in the test.
+test.before(async () => {
+  const uri = await mongod.getConnectionString();
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+});
 
-// Assertions
-// Assertions are mixed into the execution object provided to each test implementation
-// t.truthy('unicorn')
-// t.is()
-// t.deepEqual()
+// populating  database with dummy data
+test.beforeEach(async t => {
+  const user = new UserModel({
+    name: 'steve',
+    email: 'steve@mail.com',
+    password: '123567',
+  });
+  await user.save();
 
-// Assertion planning
-// Assertion plans ensure tests only pass when a specific number of assertions have been executed.
-// t.plan(3);
+  t.context = {
+    app,
+    userRoute: '/user',
+    //  TODO: add extra goodUser, badUser objects
+  };
+});
 
-// Promise support
-// test('resolves with unicorn', t => {
-//   return somePromise().then(result => {
-//     t.is(result, 'unicorn');
-//   });
-// });
-
-// Running specific tests
-// During development it can be helpful to only run a few specific tests. This can be accomplished using the .only modifier:
-// test.only('will be run', t => {
-// 	t.pass();
-// });
-
-// Test placeholders ("todo")
-//test.todo('will think about writing this later');
-
-// Failing tests
-// // See: github.com/user/repo/issues/1234
-// test.failing('demonstrate some bug', t => {
-// 	t.fail(); // Test will count as passed
-// });
-
-// Skipping tests
-// test.skip('will not be run', t => {
-// 	t.fail();
-// });
-
-// Test context
-// Hooks can share context with the test:
 // test.beforeEach(t => {
-// 	t.context.data = generateUniqueData().;
+//   t.context = {
+//     app,
+//   };
 // });
+
+test.serial('litmus get user', async t => {
+  const { app, userRoute } = t.context;
+  const res = await request(app).get(`${userRoute}/litmus`);
+
+  console.log(res.text);
+  t.is(res.status, 200);
+
+  // t.is(res.body.name, 'One');
+});
 //
-// test('context data is foo', t => {
-// 	t.is(t.context.data + 'bar', 'foobar');
+// test.serial('litmus create user', async t => {
+//   const { app } = t.context;
+//   const res = await request(app)
+//     .post('/litmus')
+//     .send({
+//       email: 'new@example.com',
+//       name: 'New name',
+//     });
+//
+//   t.is(res.status, 200);
+//   t.is(res.body.name, 'New name');
+//
+//   // Verify that user is created in DB
+//   const newUser = await User.findOne({ email: 'new@example.com' });
+//   t.is(newUser.name, 'New name');
 // });
+
+// TODO: test error messages
+// let error = badUser.validateSync();
 
 // test('Create new user', async t => {
 //   t.plan(3);
@@ -77,3 +86,8 @@ import app from '../../app';
 //   t.is(res.body.name, userToCreate.name);
 //   t.is(res.body.age, userToCreate.age);
 // });
+
+// TODO SAi: should this be at the bottom of the page?
+// clearing Dummy data
+test.afterEach.always(() => UserModel.deleteMany());
+// .remove is being deprecated
