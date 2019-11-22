@@ -11,11 +11,15 @@ const mongod = new MongoMemoryServer();
 
 test.before(async () => {
   const uri = await mongod.getConnectionString();
-  await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  });
+
+  await mongoose
+    .connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    })
+    .then(() => console.log('Fake Mongo connected'))
+    .catch(err => console.error(err.message));
 });
 
 // populating  database with dummy data
