@@ -3,21 +3,13 @@ const router = express.Router();
 
 // const litmusRouter = require('./litmus');
 
-router.get('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [GET]`);
-});
+const litmusResponseMsg = req =>
+  `Test route for ${req.originalUrl} [${req.method}]`;
 
-router.post('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [POST]`);
-});
-
-router.delete('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [DELETE]`);
-});
-
-router.put('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [PUT]`);
-});
+router.get('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
+router.post('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
+router.delete('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
+router.put('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
 
 //
 // router.get('/all', async (req, res) => {
