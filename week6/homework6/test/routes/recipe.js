@@ -1,2 +1,6 @@
 /* eslint-disable */
-// import test from 'ava';
+import test from 'ava';
+
+test('my passing test', t => {
+  t.pass();
+});

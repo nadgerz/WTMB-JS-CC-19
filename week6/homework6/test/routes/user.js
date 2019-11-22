@@ -11,21 +11,31 @@ const mongod = new MongoMemoryServer();
 
 test.before(async () => {
   const uri = await mongod.getConnectionString();
-  await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-});
+  const debug = false;
 
-// populating  database with dummy data
-test.beforeEach(async t => {
+  await mongoose
+    .connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    })
+    .then(() => {
+      if (debug) {
+        console.log('Fake Mongo connected');
+      }
+    })
+    .catch(err => console.error(err.message));
+
   const user = new UserModel({
-    name: 'steve',
+    name: 'STEVE',
     email: 'steve@mail.com',
     password: '123567',
   });
   await user.save();
+});
 
+// populating  database with dummy data
+test.beforeEach(async t => {
   t.context = {
     app,
     userRoute: '/user',
@@ -33,21 +43,42 @@ test.beforeEach(async t => {
   };
 });
 
-// test.beforeEach(t => {
-//   t.context = {
-//     app,
-//   };
-// });
-
-test.serial('litmus get user', async t => {
-  const { app, userRoute } = t.context;
-  const res = await request(app).get(`${userRoute}/litmus`);
-
-  console.log(res.text);
+const checkLitmusResponse = (t, res) => {
   t.is(res.status, 200);
+  t.is(res.text, `Test route for ${res.req.path} [${res.req.method}]`);
+};
 
-  // t.is(res.body.name, 'One');
+test('litmus tests for GET/POST/DELETE/PUT', async t => {
+  t.plan(8);
+  const { app, userRoute } = t.context;
+  const litmusRoute = `${userRoute}/litmus`;
+  let res;
+
+  res = await request(app).get(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).post(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).delete(litmusRoute);
+  checkLitmusResponse(t, res);
+
+  res = await request(app).put(litmusRoute);
+  checkLitmusResponse(t, res);
 });
+
+test.serial('get all users', async t => {
+  const { app, userRoute } = t.context;
+  const res = await request(app).get(`${userRoute}/all`);
+
+  t.is(res.status, 200);
+  t.true(Array.isArray(res.body));
+
+  // // Verify that user is created in DB
+  // const newUser = await User.findOne({ email: 'new@example.com' });
+  // t.is(newUser.name, 'New name');
+});
+
 //
 // test.serial('litmus create user', async t => {
 //   const { app } = t.context;

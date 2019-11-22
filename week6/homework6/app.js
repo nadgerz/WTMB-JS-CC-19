@@ -1,10 +1,10 @@
 /* eslint-disable */
 const express = require('express');
-const connectDB = require('./config/db');
+// const connectDB = require('./config/db');
 const HttpStatus = require('http-status-codes');
 
 const app = express();
-connectDB();
+// connectDB();
 
 // Init Middleware
 app.set('view engine', 'pug');

@@ -1,6 +1,8 @@
 const Chalk = require('chalk');
-// const path = require('path');
 const app = require('./app');
+const connectDB = require('./config/db');
+
+connectDB();
 
 // Start up the server on a customer port, if required.
 const DEFAULT_PORT = 3000;

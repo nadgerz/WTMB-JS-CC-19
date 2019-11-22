@@ -1,35 +1,27 @@
 const express = require('express');
 const router = express.Router();
+const UserService = require('../services/user-service');
 
 // const litmusRouter = require('./litmus');
 
-router.get('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [GET]\n`);
-});
+const litmusResponseMsg = req =>
+  `Test route for ${req.originalUrl} [${req.method}]`;
 
-router.post('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [POST]\n`);
-});
+router.get('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
+router.post('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
+router.delete('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
+router.put('/litmus', (req, res) => res.send(litmusResponseMsg(req)));
 
-router.delete('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [DELETE]\n`);
+router.get('/all', async (req, res) => {
+  // res.send([]);
+  try {
+    const users = await UserService.findAll();
+    // console.log('USERS', users);
+    res.send(users);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
 });
-
-router.put('/litmus', (req, res) => {
-  res.send(`Test route for ${req.originalUrl} [PUT]\n`);
-});
-
-//
-// router.get('/all', async (req, res) => {
-//   try {
-//     const users = await UserService.findAll();
-//     // console.log('USERS', users);
-//     res.send(users);
-//   } catch (err) {
-//     res.send(err.response.data.message);
-//     // res.status(418).send('Database down');
-//   }
-// });
 //
 //
 // router.get('/', async (req, res) => {

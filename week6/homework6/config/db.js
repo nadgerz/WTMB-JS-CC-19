@@ -14,7 +14,7 @@ if (!config.has(mongoURI)) {
   // Exit process with failure
   process.exit(1);
 }
-const dbUrl = config.get('mongoURI');
+const dbUrl = config.get(mongoURI);
 
 const connectDB = async () => {
   try {
@@ -24,7 +24,7 @@ const connectDB = async () => {
       useCreateIndex: true,
     });
 
-    console.log('MongoDB Connected...');
+    console.log(`MongoDB Connected to ${dbUrl}`);
   } catch (err) {
     console.error(err.message);
     // Exit process with failure
