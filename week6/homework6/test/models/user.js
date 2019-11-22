@@ -25,18 +25,21 @@ test('creating new user with valid input', async t => {
   t.is(validUser.email, t.context.user.email);
   t.is(validUser.password, t.context.user.password);
 });
-
-test('creating a user with an invalid username', t => {
-  t.context.user.name = 's';
-  const badUser = new UserModel(t.context.user);
-  console.log(badUser);
-
-  // t.false(badUser);
-
-  let error = badUser.validateSync();
-  console.log('ERROR');
-  console.log(error);
-});
+//
+// test('creating a user with an invalid username', async t => {
+//   t.context.user.name = 's';
+//   const badUser = new UserModel(t.context.user);
+//
+//   // this returns a promise without the await
+//   console.log('badUser.save');
+//   console.log(await badUser.save());
+//
+//   // t.false(badUser);
+//
+//   // let error = badUser.validateSync();
+//   // console.log('ERROR');
+//   // console.log(error);
+// });
 
 // test.after.always(async () => {
 //   mongoose.disconnect();
