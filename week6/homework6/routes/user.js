@@ -16,25 +16,34 @@ router.get('/all', async (req, res) => {
   // res.send([]);
   try {
     const users = await UserService.findAll();
-    // console.log('USERS', users);
     res.send(users);
   } catch (err) {
     res.send(err.response.data.message);
   }
 });
-//
-//
-// router.get('/', async (req, res) => {
-//   try {
-//     const query = req.query;
-//     const user = await UserService.find(query);
-//
-//     res.send(user);
-//   } catch (err) {
-//     res.send(err.response.data.message);
-//     // res.status(418).send('Database down');
-//   }
-// });
+
+router.post(`/`, async (req, res) => {
+  try {
+    const user = await UserService.add(req.body);
+    res.send(user);
+    // res.render('user', { user });
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
+
+router.get('/', async (req, res) => {
+  // console.log('QUERY');
+  // res.send(req.query);
+
+  try {
+    const query = req.query;
+    const user = await UserService.find(query);
+    res.send(user);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
 //
 //
 // router.delete('/all', async (req, res) => {
@@ -58,16 +67,7 @@ router.get('/all', async (req, res) => {
 // });
 //
 //
-// router.post(`/`, async (req, res) => {
-//   try {
-//     const user = await UserService.add(req.body);
-//     res.send(user);
-//     // res.render('user', { user });
-//   } catch (err) {
-//     res.send(err.response.data.message);
-//     // res.status(418).send(err);
-//   }
-// });
+
 //
 //
 // router.delete(`/:id`, async (req, res) => {
