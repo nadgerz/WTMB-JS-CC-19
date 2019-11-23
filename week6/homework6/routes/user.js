@@ -32,17 +32,18 @@ router.post(`/`, async (req, res) => {
   }
 });
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const query = req.query;
-//     const user = await UserService.find(query);
-//
-//     res.send(user);
-//   } catch (err) {
-//     res.send(err.response.data.message);
-//     // res.status(418).send('Database down');
-//   }
-// });
+router.get('/', async (req, res) => {
+  // console.log('QUERY');
+  // res.send(req.query);
+
+  try {
+    const query = req.query;
+    const user = await UserService.find(query);
+    res.send(user);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
 //
 //
 // router.delete('/all', async (req, res) => {

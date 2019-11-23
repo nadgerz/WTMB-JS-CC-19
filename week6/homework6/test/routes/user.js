@@ -53,7 +53,7 @@ const checkLitmusResponse = (t, res) => {
   t.is(res.text, `Test route for ${res.req.path} [${res.req.method}]`);
 };
 
-test('litmus tests for GET/POST/DELETE/PUT', async t => {
+test.serial('litmus tests for GET/POST/DELETE/PUT', async t => {
   t.plan(8);
   const { app, userRoute } = t.context;
   const litmusRoute = `${userRoute}/litmus`;
@@ -97,6 +97,30 @@ test.serial('create a user', async t => {
   // Verify that user is created in DB / find(query) returns an array
   const [newUserInDb] = await UserService.find({ email: newUser.email });
   t.is(newUserInDb.name, newUser.name);
+});
+
+test.serial('get a user', async t => {
+  const { app, userRoute, newUser } = t.context;
+  const [userInDb] = await UserService.find({ email: newUser.email });
+  const userId = userInDb._id.toString();
+
+  const res = await request(app)
+    .get(`${userRoute}/`)
+    .query({ _id: userId });
+
+  const [foundUser] = res.body;
+  const foundUserId = foundUser._id.toString();
+  // console.log(typeof foundUserId);
+  // console.log(typeof userId);
+
+  t.is(res.status, 200);
+  t.is(foundUserId, userId);
+  // t.is(res.body.email, newUser.email);
+  // t.is(res.body.password, newUser.password);
+  //
+  // // Verify that user is created in DB / find(query) returns an array
+  // const [newUserInDb] = await UserService.find({ email: newUser.email });
+  // t.is(newUserInDb.name, newUser.name);
 });
 
 // test.serial('create a user with bad name', async t => {
@@ -143,4 +167,4 @@ test.serial('create a user', async t => {
 // });
 
 // clearing Dummy data
-test.afterEach.always(() => UserModel.deleteMany());
+test.after.always(() => UserModel.deleteMany());
