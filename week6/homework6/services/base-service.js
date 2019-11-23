@@ -11,24 +11,6 @@ module.exports = class Service {
     return this.model.find();
   }
 
-  /*
-	 fetch('https://example.com')
-.then(res => {
-  res.text()       // response body (=> Promise)
-  res.json()       // parse via JSON (=> Promise)
-  res.status       //=> 200
-  res.statusText   //=> 'OK'
-  res.redirected   //=> false
-  res.ok           //=> true
-  res.url          //=> 'https://example.com'
-  res.type         //=> 'basic'
-                   //   ('cors' 'default' 'error'
-                   //    'opaque' 'opaqueredirect')
-
-  res.headers.get('Content-Type')
-})
-*/
-
   add(item) {
     return this.model.create(item);
   }

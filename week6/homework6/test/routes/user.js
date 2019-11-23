@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 import app from '../../app';
 import UserModel from '../../models/user';
+import UserService from '../../services/user-service';
 
 // Start MongoDB instance
 const mongod = new MongoMemoryServer();
@@ -26,20 +27,24 @@ test.before(async () => {
     })
     .catch(err => console.error(err.message));
 
+  // populating  database with dummy data
   const user = new UserModel({
-    name: 'STEVE',
-    email: 'steve@mail.com',
+    name: 'First user',
+    email: 'firstUser@mail.com',
     password: '123567',
   });
   await user.save();
 });
 
-// populating  database with dummy data
 test.beforeEach(async t => {
   t.context = {
     app,
     userRoute: '/user',
-    //  TODO: add extra goodUser, badUser objects
+    newUser: {
+      name: 'STEVE',
+      email: 'steve@mail.com',
+      password: '123567',
+    },
   };
 });
 
@@ -73,32 +78,51 @@ test.serial('get all users', async t => {
 
   t.is(res.status, 200);
   t.true(Array.isArray(res.body));
+  // console.log(res.body);
 
-  // // Verify that user is created in DB
-  // const newUser = await User.findOne({ email: 'new@example.com' });
-  // t.is(newUser.name, 'New name');
+  // TODO: check for length of array?
 });
 
-//
-// test.serial('litmus create user', async t => {
-//   const { app } = t.context;
-//   const res = await request(app)
-//     .post('/litmus')
-//     .send({
-//       email: 'new@example.com',
-//       name: 'New name',
-//     });
-//
-//   t.is(res.status, 200);
-//   t.is(res.body.name, 'New name');
-//
-//   // Verify that user is created in DB
-//   const newUser = await User.findOne({ email: 'new@example.com' });
-//   t.is(newUser.name, 'New name');
-// });
+test.serial('create a user', async t => {
+  const { app, userRoute, newUser } = t.context;
+  const res = await request(app)
+    .post(`${userRoute}/`)
+    .send(newUser);
 
-// TODO: test error messages
-// let error = badUser.validateSync();
+  t.is(res.status, 200);
+  t.is(res.body.name, newUser.name);
+  t.is(res.body.email, newUser.email);
+  t.is(res.body.password, newUser.password);
+
+  // Verify that user is created in DB / find(query) returns an array
+  const [newUserInDb] = await UserService.find({ email: newUser.email });
+  t.is(newUserInDb.name, newUser.name);
+});
+
+// test.serial('create a user with bad name', async t => {
+//   const { app, userRoute, newUser } = t.context;
+//   newUser.name = 's';
+//
+//   const res = await request(app)
+//     .post(`${userRoute}/`)
+//     .send(newUser);
+//
+//   // console.log(res);
+// //   res._data: the user object
+// //   res.body: same
+//
+// // TODO: test error messages, BUT HOW?!
+// // let error = badUser.validateSync();
+//
+//   let error = res.body.validateSync();
+//   console.log(error);
+//
+//   // t.is(res.status, 200);
+//   // t.is(res.body.name, newUser.name);
+//   // t.is(res.body.email, newUser.email);
+//   // t.is(res.body.password, newUser.password);
+//   //
+// });
 
 // test('Create new user', async t => {
 //   t.plan(3);
@@ -118,7 +142,5 @@ test.serial('get all users', async t => {
 //   t.is(res.body.age, userToCreate.age);
 // });
 
-// TODO SAi: should this be at the bottom of the page?
 // clearing Dummy data
 test.afterEach.always(() => UserModel.deleteMany());
-// .remove is being deprecated
