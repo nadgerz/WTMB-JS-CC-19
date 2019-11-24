@@ -78,9 +78,7 @@ test.serial('get all users', async t => {
 
   t.is(res.status, 200);
   t.true(Array.isArray(res.body));
-  // console.log(res.body);
-
-  // TODO: check for length of array?
+  t.true(res.body.length >= 1);
 });
 
 test.serial('create a user', async t => {
@@ -110,17 +108,33 @@ test.serial('get a user', async t => {
 
   const [foundUser] = res.body;
   const foundUserId = foundUser._id.toString();
-  // console.log(typeof foundUserId);
-  // console.log(typeof userId);
 
   t.is(res.status, 200);
   t.is(foundUserId, userId);
-  // t.is(res.body.email, newUser.email);
-  // t.is(res.body.password, newUser.password);
-  //
-  // // Verify that user is created in DB / find(query) returns an array
-  // const [newUserInDb] = await UserService.find({ email: newUser.email });
-  // t.is(newUserInDb.name, newUser.name);
+});
+
+test.serial('delete a user', async t => {
+  const { app, userRoute, newUser: user } = t.context;
+  const [userInDb] = await UserService.find({ email: user.email });
+  const userId = userInDb._id.toString();
+
+  const res = await request(app)
+    .delete(`${userRoute}/`)
+    .query({ id: userId });
+
+  t.is(res.status, 200);
+  t.true(res.body.ok === 1);
+
+  // Verify that user is no longer in the DB
+  const fetch = await request(app).get(`${userRoute}/${userId}`);
+  t.is(fetch.status, 404);
+
+  // TODO: discuss what is going on here
+  // const [deletedUser] = await UserService.find({ _id: userId });
+  // console.log(typeof deletedUser);
+  // console.log(deletedUser);
+  // console.log(UserService.findAll.length);
+  // t.falsy(deletedUser);
 });
 
 // test.serial('create a user with bad name', async t => {
