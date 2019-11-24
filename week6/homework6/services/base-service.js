@@ -11,7 +11,7 @@ module.exports = class Service {
     return this.model.find();
   }
 
-  add(item) {
+  async add(item) {
     return this.model.create(item);
   }
 

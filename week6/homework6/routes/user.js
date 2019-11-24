@@ -33,9 +33,6 @@ router.post(`/`, async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  // console.log('QUERY');
-  // res.send(req.query);
-
   try {
     const query = req.query;
     const user = await UserService.find(query);
@@ -44,8 +41,17 @@ router.get('/', async (req, res) => {
     res.send(err.response.data.message);
   }
 });
-//
-//
+
+router.delete('/', async (req, res) => {
+  try {
+    const { id } = req.query.id;
+    const user = await UserService.deleteById(id);
+    res.send(user);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
+
 // router.delete('/all', async (req, res) => {
 //   try {
 //     await UserService.delete();
