@@ -3,15 +3,15 @@ module.exports = class Service {
     this.model = model;
   }
 
-  update() {
-    return this.model.save();
+  update(query, update) {
+    return this.model.updateOne(query, update);
   }
 
   findAll() {
     return this.model.find();
   }
 
-  add(item) {
+  async add(item) {
     return this.model.create(item);
   }
 

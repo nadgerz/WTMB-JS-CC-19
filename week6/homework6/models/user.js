@@ -8,8 +8,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'User name is required'],
     // defining an error message
-    minLength: [2, 'Name should be longer than 1 letter'],
-    maxLength: [20, 'The maximum characters allowed is 20 characters'],
+    minlength: [2, 'Name should be longer than 1 letter'],
+    maxlength: [20, 'The maximum characters allowed is 20 characters'],
   },
   email: {
     type: String,
@@ -25,8 +25,8 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Password is required'],
-    minLength: [6, 'the minimum length is 6 characters'],
-    maxLength: [30, 'the maximum characters allowed is 30'],
+    minlength: [6, 'the minimum length is 6 characters'],
+    maxlength: [30, 'the maximum characters allowed is 30'],
   },
   recipes: [
     {
