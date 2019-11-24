@@ -52,6 +52,16 @@ router.delete('/', async (req, res) => {
   }
 });
 
+router.put('/', async (req, res) => {
+  try {
+    const { query, update } = req.body;
+    const user = await UserService.update(query, update);
+    res.send(user);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
+
 // router.delete('/all', async (req, res) => {
 //   try {
 //     await UserService.delete();
