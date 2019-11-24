@@ -37,6 +37,7 @@ test('creating new user with valid input', async t => {
 //   // t.false(badUser);
 //
 //   // let error = badUser.validateSync();
+// error.errors.message
 //   // console.log('ERROR');
 //   // console.log(error);
 // });
