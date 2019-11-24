@@ -137,6 +137,33 @@ test.serial('delete a user', async t => {
   // t.falsy(deletedUser);
 });
 
+test.serial('update a user', async t => {
+  const { app, userRoute, newUser: user } = t.context;
+  const [userInDb] = await UserService.find({ email: user.email });
+  const userId = userInDb._id.toString();
+  const newName = 'Steve';
+
+  const res = await request(app)
+    .put(`${userRoute}/`)
+    .send({
+      query: { _id: userId },
+      update: { name: newName },
+    });
+
+  t.true(true);
+  t.is(res.status, 200);
+  t.true(res.body.ok === 1);
+
+  // Verify that user was updated in the DB
+  const fetched = await request(app)
+    .get(`${userRoute}/`)
+    .query({ _id: userId });
+
+  const [updatedUser] = fetched.body;
+  t.is(fetched.status, 200);
+  t.is(updatedUser.name, newName);
+});
+
 // test.serial('create a user with bad name', async t => {
 //   const { app, userRoute, newUser } = t.context;
 //   newUser.name = 's';

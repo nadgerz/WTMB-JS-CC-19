@@ -3,8 +3,8 @@ module.exports = class Service {
     this.model = model;
   }
 
-  update() {
-    return this.model.save();
+  update(query, update) {
+    return this.model.updateOne(query, update);
   }
 
   findAll() {
