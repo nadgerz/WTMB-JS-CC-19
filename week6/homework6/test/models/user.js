@@ -16,8 +16,8 @@ test.beforeEach(t => {
       },
       email: {
         required: 'Email is required',
+        failedValidation: '@ is not a valid email address!',
         notUnique: 'A User with this Email already exists',
-        // failedValidation: TODO: check for this as well
       },
       password: {
         required: 'Password is required',
@@ -70,21 +70,20 @@ test('creating a user with invalid username', async t => {
   errorMsg = getErrorMsg(badUser, badProperty);
   t.is(errorMsg, errorMsgExpected);
 });
-//
-// test('creating a user with invalid email', async t => {
-//   t.plan(2);
-//   t.context.user.email = '';
-//   const badProperty = 'email';
-//   let errorMsgExpected = t.context.errorMsgs.email.required;
-//   let badUser = new UserModel(t.context.user);
-//
-//   let errorMsg = getErrorMsg(badUser, badProperty);
-//   t.is(errorMsg, errorMsgExpected);
-//
-//   t.context.user.email = 's';
-//   errorMsgExpected = t.context.errorMsgs.email.tooLong;
-//   badUser = new UserModel(t.context.user);
-//
-//   errorMsg = getErrorMsg(badUser, badProperty);
-//   t.is(errorMsg, errorMsgExpected);
-// });
+
+test('creating a user with invalid email', async t => {
+  t.plan(2);
+  const badProperty = 'email';
+
+  t.context.user.email = null;
+  let errorMsgExpected = t.context.errorMsgs.email.required;
+  let badUser = new UserModel(t.context.user);
+  let errorMsg = getErrorMsg(badUser, badProperty);
+  t.is(errorMsg, errorMsgExpected);
+
+  t.context.user.email = '@';
+  errorMsgExpected = t.context.errorMsgs.email.failedValidation;
+  badUser = new UserModel(t.context.user);
+  errorMsg = getErrorMsg(badUser, badProperty);
+  t.is(errorMsg, errorMsgExpected);
+});
