@@ -221,4 +221,9 @@ test.serial('get a user via params', async t => {
 // });
 
 // clearing Dummy data
-test.after.always(() => UserModel.deleteMany());
+// disconnect from and stop MongoDB
+test.after.always(() => {
+  UserModel.deleteMany();
+  mongoose.disconnect();
+  mongod.stop();
+});
