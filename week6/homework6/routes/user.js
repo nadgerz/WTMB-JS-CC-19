@@ -42,6 +42,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await UserService.findById(id);
+    res.send(user);
+  } catch (err) {
+    res.send(err.response.data.message);
+  }
+});
+
 router.delete('/', async (req, res) => {
   try {
     const { id } = req.query.id;
