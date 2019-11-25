@@ -11,6 +11,22 @@ test.beforeEach(t => {
       email: 'steve@mail.com',
       password: '123567',
     },
+    errorMsgs: {
+      name: {
+        required: 'User name is required',
+        tooShort: 'Name should be longer than 1 letter',
+        tooLong: 'The maximum characters allowed is 20 characters',
+      },
+      email: {
+        required: 'Email is required',
+        noUnique: 'A User with this Email already exists',
+      },
+      password: {
+        required: 'Password is required',
+        tooShort: 'the minimum length is 6 characters',
+        tooLong: 'the maximum characters allowed is 30',
+      },
+    },
   };
 });
 
@@ -25,22 +41,29 @@ test('creating new user with valid input', async t => {
   t.is(validUser.email, t.context.user.email);
   t.is(validUser.password, t.context.user.password);
 });
-//
-// test('creating a user with an invalid username', async t => {
-//   t.context.user.name = 's';
-//   const badUser = new UserModel(t.context.user);
-//
-//   // this returns a promise without the await
-//   console.log('badUser.save');
-//   console.log(await badUser.save());
-//
-//   // t.false(badUser);
-//
-//   // let error = badUser.validateSync();
-// error.errors.message
-//   // console.log('ERROR');
-//   // console.log(error);
-// });
+
+const getErrorMsg = (badUser, badProperty) => {
+  const error = badUser.validateSync();
+  return error.errors[badProperty].message;
+};
+
+test('creating a user with an invalid username', async t => {
+  t.plan(2);
+  t.context.user.name = 's';
+  const badProperty = 'name';
+  let errorMsgExpected = t.context.errorMsgs.name.tooShort;
+  let badUser = new UserModel(t.context.user);
+
+  let errorMsg = getErrorMsg(badUser, badProperty);
+  t.is(errorMsg, errorMsgExpected);
+
+  t.context.user.name = 'sssssssssssssssssssssssssssssss';
+  errorMsgExpected = t.context.errorMsgs.name.tooLong;
+  badUser = new UserModel(t.context.user);
+
+  errorMsg = getErrorMsg(badUser, badProperty);
+  t.is(errorMsg, errorMsgExpected);
+});
 
 // test.after.always(async () => {
 //   mongoose.disconnect();

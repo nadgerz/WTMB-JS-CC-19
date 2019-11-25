@@ -97,7 +97,7 @@ test.serial('create a user', async t => {
   t.is(newUserInDb.name, newUser.name);
 });
 
-test.serial('get a user', async t => {
+test.serial('get a user via query', async t => {
   const { app, userRoute, newUser } = t.context;
   const [userInDb] = await UserService.find({ email: newUser.email });
   const userId = userInDb._id.toString();
@@ -113,56 +113,69 @@ test.serial('get a user', async t => {
   t.is(foundUserId, userId);
 });
 
-test.serial('delete a user', async t => {
+test.serial('get a user via params', async t => {
   const { app, userRoute, newUser: user } = t.context;
   const [userInDb] = await UserService.find({ email: user.email });
   const userId = userInDb._id.toString();
 
-  const res = await request(app)
-    .delete(`${userRoute}/`)
-    .query({ id: userId });
+  const res = await request(app).get(`${userRoute}/${userId}`);
 
   t.is(res.status, 200);
-  t.true(res.body.ok === 1);
 
-  // Verify that user is no longer in the DB
-  const fetch = await request(app).get(`${userRoute}/${userId}`);
-  t.is(fetch.status, 404);
-
-  // TODO: discuss what is going on here
-  // const [deletedUser] = await UserService.find({ _id: userId });
-  // console.log(typeof deletedUser);
-  // console.log(deletedUser);
-  // console.log(UserService.findAll.length);
-  // t.falsy(deletedUser);
+  const fetchedUserId = res.body._id.toString();
+  t.is(fetchedUserId, userId);
 });
 
-test.serial('update a user', async t => {
-  const { app, userRoute, newUser: user } = t.context;
-  const [userInDb] = await UserService.find({ email: user.email });
-  const userId = userInDb._id.toString();
-  const newName = 'Steve';
+// test.serial('delete a user via a query', async t => {
+//   const { app, userRoute, newUser: user } = t.context;
+//   const [userInDb] = await UserService.find({ email: user.email });
+//   const userId = userInDb._id.toString();
+//
+//   const res = await request(app)
+//     .delete(`${userRoute}/`)
+//     .query({ id: userId });
+//
+//   t.is(res.status, 200);
+//   t.true(res.body.ok === 1);
+//
+//   // Verify that user is no longer in the DB
+//   const fetch = await request(app).get(`${userRoute}/${userId}`);
+//   t.is(fetch.status, 404);
+//
+//   // TODO: discuss what is going on here
+//   // const [deletedUser] = await UserService.find({ _id: userId });
+//   // console.log(typeof deletedUser);
+//   // console.log(deletedUser);
+//   // console.log(UserService.findAll.length);
+//   // t.falsy(deletedUser);
+// });
 
-  const res = await request(app)
-    .put(`${userRoute}/`)
-    .send({
-      query: { _id: userId },
-      update: { name: newName },
-    });
-
-  t.true(true);
-  t.is(res.status, 200);
-  t.true(res.body.ok === 1);
-
-  // Verify that user was updated in the DB
-  const fetched = await request(app)
-    .get(`${userRoute}/`)
-    .query({ _id: userId });
-
-  const [updatedUser] = fetched.body;
-  t.is(fetched.status, 200);
-  t.is(updatedUser.name, newName);
-});
+// test.serial('update a user', async t => {
+//   const { app, userRoute, newUser: user } = t.context;
+//   const [userInDb] = await UserService.find({ email: user.email });
+//   const userId = userInDb._id.toString();
+//   const newName = 'Steve';
+//
+//   const res = await request(app)
+//     .put(`${userRoute}/`)
+//     .send({
+//       query: { _id: userId },
+//       update: { name: newName },
+//     });
+//
+//   t.true(true);
+//   t.is(res.status, 200);
+//   t.true(res.body.ok === 1);
+//
+//   // Verify that user was updated in the DB
+//   const fetched = await request(app)
+//     .get(`${userRoute}/`)
+//     .query({ _id: userId });
+//
+//   const [updatedUser] = fetched.body;
+//   t.is(fetched.status, 200);
+//   t.is(updatedUser.name, newName);
+// });
 
 // test.serial('create a user with bad name', async t => {
 //   const { app, userRoute, newUser } = t.context;
@@ -208,4 +221,9 @@ test.serial('update a user', async t => {
 // });
 
 // clearing Dummy data
-test.after.always(() => UserModel.deleteMany());
+// disconnect from and stop MongoDB
+test.after.always(() => {
+  UserModel.deleteMany();
+  mongoose.disconnect();
+  mongod.stop();
+});
